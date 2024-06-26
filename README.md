@@ -21,11 +21,11 @@
 
 分流规则
 
-https://github.com/pxx917144686/ios_rule_script/tree/master/rule
+https://github.com/pxx917144686/ios/tree/master/rule
 
 复写规则
 
-https://github.com/pxx917144686/ios_rule_script/tree/master/rewrite
+https://github.com/pxx917144686/ios/tree/master/rewrite
 
 所有规则数据都来自互联网，感谢开源规则项目作者的辛勤付出。
 
