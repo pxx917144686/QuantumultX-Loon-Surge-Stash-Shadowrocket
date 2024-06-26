@@ -4,7 +4,7 @@
 # 此脚本用于 chat Smith APP  https://apps.apple.com/sg/app/ai-chatbot-ai-chat-smith-4/id1559479889?l=zh-Hans-CN
 # 此脚本，已是混淆的版本，混淆代码，使其更难理解和复制。
 
-^https?:\/\/buy\.itunes\.apple\.com\/verifyReceipt$ url script-response-body https://raw.githubusercontent.com/pxx917144686/ios/master/rewrite/QuantumultX/chat_Smith.js
+^https?:\/\/buy\.itunes\.apple\.com\/verifyReceipt$ url script-response-body QuantumultX/chat_Smith_pxx917144686.js
 
 [MITM]
 hostname = buy.itunes.apple.com
