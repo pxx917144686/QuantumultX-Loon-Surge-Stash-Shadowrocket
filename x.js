@@ -6,7 +6,7 @@
 \pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
 
 \f0\fs24 \cf0 [rewrite_local]\
-^https?:\\/\\/buy\\.itunes\\.apple\\.com\\/verifyReceipt$ url script-response-body https://gist.githubusercontent.com/pxx917144686/ccf81d0f8531194ebd73aa437dfe7507/raw/401b6145572d8cd9f53c9709a66779b50fd30257/chat%2520Smith_pxx.js\
+^https?:\\/\\/buy\\.itunes\\.apple\\.com\\/verifyReceipt$ url script-response-body https://github.com/pxx917144686/ios/blob/master/x.js\
 \
 [MITM]\
 hostname = buy.itunes.apple.com\
