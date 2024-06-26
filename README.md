@@ -35,22 +35,22 @@ https://github.com/pxx917144686/ios/tree/master/rewrite
 
 | 脚本                                                         | 介绍                                 | 框架        | 维护状态 |
 | ------------------------------------------------------------ | ------------------------------------ | ----------- | -------- |
-| [什么值得买](https://github.com/blackmatrix7/ios_rule_script/tree/master/script/smzdm) | 什么值得买任务和去广告               | MagicJS 2/3 | 正常     |
-| [百度贴吧](https://github.com/blackmatrix7/ios_rule_script/tree/master/script/tieba) | 带重试功能的贴吧签到，提高签到成功率 | MagicJS 3   | 正常     |
-| [开屏去广告](https://github.com/blackmatrix7/ios_rule_script/tree/master/script/startup) | 通过脚本去除缓存到本地的APP开屏广告  | MagicJS 3   | 正常     |
-| [慢慢买](https://github.com/blackmatrix7/ios_rule_script/tree/master/script/manmanbuy) | 每日自动签到                         | MagicJS 2   | 正常     |
-| [叮咚买菜](https://github.com/blackmatrix7/ios_rule_script/tree/master/script/dingdong) | 每日自动签到                         | MagicJS 3   | 正常     |
-| [Fa米家](https://github.com/blackmatrix7/ios_rule_script/tree/master/script/famijia) | 每日自动签到                         | MagicJS 2   | 正常     |
-| [Luka](https://github.com/blackmatrix7/ios_rule_script/tree/master/script/luka) | 每日自动签到                         | MagicJS 2   | 正常     |
-| [哲也同学](https://github.com/blackmatrix7/ios_rule_script/tree/master/script/zheye) | 之乎者也                             | MagicJS 3   | 正常     |
-| [Synology](https://github.com/blackmatrix7/ios_rule_script/tree/master/script/synology) | 群晖Download Station资源离线下载     | MagicJS 3   | 正常     |
-| [AppleStore](https://github.com/blackmatrix7/ios_rule_script/tree/master/script/applestore) | AppleStore 商品库存监控              | MagicJS 3   | 暂停     |
+| [什么值得买](https://github.com/blackmatrix7/ios/tree/master/script/smzdm) | 什么值得买任务和去广告               | MagicJS 2/3 | 正常     |
+| [百度贴吧](https://github.com/blackmatrix7/ios/tree/master/script/tieba) | 带重试功能的贴吧签到，提高签到成功率 | MagicJS 3   | 正常     |
+| [开屏去广告](https://github.com/blackmatrix7/ios/tree/master/script/startup) | 通过脚本去除缓存到本地的APP开屏广告  | MagicJS 3   | 正常     |
+| [慢慢买](https://github.com/blackmatrix7/ios/tree/master/script/manmanbuy) | 每日自动签到                         | MagicJS 2   | 正常     |
+| [叮咚买菜](https://github.com/blackmatrix7/ios/tree/master/script/dingdong) | 每日自动签到                         | MagicJS 3   | 正常     |
+| [Fa米家](https://github.com/blackmatrix7/ios/tree/master/script/famijia) | 每日自动签到                         | MagicJS 2   | 正常     |
+| [Luka](https://github.com/blackmatrix7/ios/tree/master/script/luka) | 每日自动签到                         | MagicJS 2   | 正常     |
+| [哲也同学](https://github.com/blackmatrix7/ios/tree/master/script/zheye) | 之乎者也                             | MagicJS 3   | 正常     |
+| [Synology](https://github.com/blackmatrix7/ios/tree/master/script/synology) | 群晖Download Station资源离线下载     | MagicJS 3   | 正常     |
+| [AppleStore](https://github.com/blackmatrix7/ios/tree/master/script/applestore) | AppleStore 商品库存监控              | MagicJS 3   | 暂停     |
 
 #### Quantumult X Gallery
 
 部分脚本已配置为Quantumult X Gallery。
 
-地址： https://raw.githubusercontent.com/pxx917144686/ios_rule_script/master/script/gallery.json
+地址： https://raw.githubusercontent.com/pxx917144686/ios/master/script/gallery.json
 
 #### BoxJS
 
@@ -62,7 +62,7 @@ https://github.com/pxx917144686/ios/tree/master/rewrite
 
 项目中资源来自互联网上其他开源项目（具体以不同目录的说明为准），这里主要进行一些整合和备份。对于此类资源，无法对使用过程中出现的任何问题进行解答，您需要联系原作者。
 
-地址：https://github.com/pxx917144686/ios_rule_script/tree/master/external
+地址：https://github.com/pxx917144686/ios/tree/master/external
 
 # 感谢
 
