@@ -1,5 +1,5 @@
 [rewrite_local]
-^https?:\/\/buy\.itunes\.apple\.com\/verifyReceipt$ url script-response-body https://github.com/pxx917144686/ios/blob/master/rewrite/QuantumultX/chat_Smith_pxx.js
+^https?:\/\/buy\.itunes\.apple\.com\/verifyReceipt$ url script-response-body https://github.com/pxx917144686/ios/blob/master/x.js
 
 [MITM]
 hostname = buy.itunes.apple.com
@@ -31,16 +31,16 @@ var receipt = {
   "transaction_id": "666666666666666",
   "is_trial_period": "false",
   "original_transaction_id": "666666666666666",
-  "purchase_date": "2024-06-26 06:06:06 Etc/GMT",
+  "purchase_date": "2023-06-06 06:06:06 Etc/GMT",
   "product_id": "https://t.me/Guding88",
-  "original_purchase_date_pst": "2024-06-26 06:06:06 America/Los_Angeles",
+  "original_purchase_date_pst": "2023-06-06 06:06:06 America/Los_Angeles",
   "in_app_ownership_type": "PURCHASED",
   "subscription_group_identifier": "20877951",
   "original_purchase_date_ms": "1686002766000",
   "web_order_line_item_id": "666666666666666",
   "expires_date_ms": "148204937166000",
-  "purchase_date_pst": "2024-06-26 06:06:06 America/Los_Angeles",
-  "original_purchase_date": "2024-06-26 06:06:06 Etc/GMT"
+  "purchase_date_pst": "2023-06-06 06:06:06 America/Los_Angeles",
+  "original_purchase_date": "2023-06-06 06:06:06 Etc/GMT"
 };
 
 var renewal = {
@@ -62,4 +62,4 @@ if (UA && uaProductMapping['CHAT%20AI'] && UA.includes('CHAT%20AI')) {
   guding.pending_renewal_info = [renewal];
 }
 
-$done({ body: JSON.stringify(pxx) });
+$done({ body: JSON.stringify(guding6) });
