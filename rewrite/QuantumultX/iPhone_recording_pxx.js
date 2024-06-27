@@ -1,5 +1,5 @@
 [rewrite_local]
-^http:\/\/call-recorder\.xinmengmakeji\.com\/ url script-response-body https://raw.githubusercontent.com/afengye/QX/main/luyin.js
+^http:\/\/call-recorder\.xinmengmakeji\.com\/ url script-response-body https://raw.githubusercontent.com/pxx917144686/ios/master/rewrite/QuantumultX/iPhone_recording_pxx.js
 [mitm] 
 hostname = call-recorder.xinmengmakeji.com
 *******************************/
