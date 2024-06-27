@@ -10,7 +10,7 @@ var pxx = $response.body;
 var obj = JSON.parse(pxx);
 
 if ($request.url.indexOf("/api/user") != -1) {
-    obj.data.phone = decrypt("afengye"); // Replace "pxx" 
+    obj.data.phone = decrypt("pxx"); // 
     obj.data.vip_expiry_date = "2099-01-01 00:00:00"; // 
 }
 
