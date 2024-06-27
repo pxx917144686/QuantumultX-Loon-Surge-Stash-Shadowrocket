@@ -1,5 +1,5 @@
 [rewrite_local]
-^https?:\/\/buy\.itunes\.apple\.com\/verifyReceipt$ url script-response-body https://raw.githubusercontent。com/pxx917144686/ios/master/rewrite/QuantumultX/pxx.js
+^https?:\/\/buy\.itunes\.apple\.com\/verifyReceipt$ url script-response-body https://raw.githubusercontent.com/pxx917144686/ios/master/rewrite/QuantumultX/pxx.js
 
 [MITM]
 hostname = buy.itunes.apple.com
