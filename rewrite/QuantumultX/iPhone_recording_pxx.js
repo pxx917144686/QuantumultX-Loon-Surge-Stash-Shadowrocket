@@ -10,8 +10,8 @@ var pxx = $response.body;
 var obj = JSON.parse(pxx);
 
 if ($request.url.indexOf("/api/user") != -1) {
-    obj.data.phone = decrypt("afengye"); // Replace "pxx" 
-    obj.data.vip_expiry_date = "2099-01-01 00:00:00"; // 
+    obj.data.phone = decrypt("pxx"); // 替换成 "pxx" 
+    obj.data.vip_expiry_date = "2099-01-01 00:00:00"; // VIP 有效期
 }
 
 pxx = JSON.stringify(obj);
@@ -32,8 +32,8 @@ $done(pxx);
     let obj = JSON.parse(pxx);
 
     if ($request.url.indexOf("/api/user") != -1) {
-        obj.data.phone = decrypt("afengye"); // Replace with actual decryption logic
-        obj.data.vip_expiry_date = "2099-01-01 00:00:00"; // Update VIP expiry date
+        obj.data.phone = decrypt("pxx"); // 解密逻辑
+        obj.data.vip_expiry_date = "2099-01-01 00:00:00"; // VIP 有效期
     }
 
     $done(JSON.stringify(obj));
