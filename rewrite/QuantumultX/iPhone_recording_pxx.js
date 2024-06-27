@@ -10,38 +10,31 @@ var pxx = $response.body;
 var obj = JSON.parse(pxx);
 
 if ($request.url.indexOf("/api/user") != -1) {
-    obj.data.phone = decrypt("pxx"); // 
+    obj.data.phone = decrypt("afengye"); // Replace "pxx" 
     obj.data.vip_expiry_date = "2099-01-01 00:00:00"; // 
 }
 
 pxx = JSON.stringify(obj);
 $done(pxx);
 
+// pxx917144686
+
 (function () {
-    const obfuscate = (input) => {
-        let result = '', charCode;
-        for (let i = 0; i < input.length; i++) {
-            charCode = input.charCodeAt(i) + 5;
-            result += String.fromCharCode(charCode);
-        }
-        return result;
-    };
-
-    const deobfuscate = (input) => {
-        let result = '', charCode;
-        for (let i = 0; i < input.length; i++) {
-            charCode = input.charCodeAt(i) - 5;
-            result += String.fromCharCode(charCode);
-        }
-        return result;
-    };
-
     const decrypt = (input) => {
-        return deobfuscate(input);
+        let result = '';
+        for (let i = 0; i < input.length; i++) {
+            result += String.fromCharCode(input.charCodeAt(i) - 5);
+        }
+        return result;
     };
 
-    let originalCode = 'var pxx = $response.body; var obj = JSON.parse(pxx); if ($request.url.indexOf("/api/user") != -1) { obj.data.phone = decrypt("afengye"); obj.data.vip_expiry_date = "2099-01-01 00:00:00"; } pxx = JSON.stringify(obj); $done(pxx);';
-    let obfuscatedCode = obfuscate(originalCode);
+    let pxx = $response.body;
+    let obj = JSON.parse(pxx);
 
-    eval(deobfuscate(obfuscatedCode));
+    if ($request.url.indexOf("/api/user") != -1) {
+        obj.data.phone = decrypt("afengye"); // Replace with actual decryption logic
+        obj.data.vip_expiry_date = "2099-01-01 00:00:00"; // Update VIP expiry date
+    }
+
+    $done(JSON.stringify(obj));
 })();
