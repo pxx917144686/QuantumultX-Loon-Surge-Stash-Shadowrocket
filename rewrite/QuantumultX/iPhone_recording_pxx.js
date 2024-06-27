@@ -3,7 +3,7 @@
 [mitm] 
 hostname = call-recorder.xinmengmakeji.com
 *******************************/
-😊😊😊 添加作者：pxx917144686
+😊😊😊 pxx917144686
 
 var pxx=$response.body;var obj=JSON.parse(pxx);if($request.url.indexOf("/api/user")!=-1){obj.data.phone="pxx";obj.data.vip_expiry_date="2099-01-01 00:00:00";}pxx=JSON.stringify(obj);$done(pxx);
 
