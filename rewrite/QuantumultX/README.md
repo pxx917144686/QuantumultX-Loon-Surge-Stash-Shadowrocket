@@ -1,23 +1,3 @@
-
-懒人配置：https://raw.githubusercontent.com/weiyesing/QuantumultX/GenMuLu/xiaodingdang.conf
-*********************************************************************************************
-
-# 分流规则
-*********************************************************************************************
-11万条去广告规则
-
-https://raw.githubusercontent.com/weiyesing/QuantumultX/GenMuLu/FenLiuGuiZe/QuGuangGao/QuGuangGao.txt 
-
-国际流媒体解锁
-
-https://raw.githubusercontent.com/weiyesing/QuantumultX/GenMuLu/FenLiuGuiZe/WangZhanFenLiu/GuoJiWangZhan
-
-国外网站定向
-
-https://raw.githubusercontent.com/weiyesing/QuantumultX/GenMuLu/FenLiuGuiZe/WangZhanFenLiu/GuoWaiWangZhan
-
-
-
 # QuantumultX 规则重写
 *********************************************************************************************
 
