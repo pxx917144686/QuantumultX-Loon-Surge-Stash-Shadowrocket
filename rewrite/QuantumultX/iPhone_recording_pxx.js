@@ -10,14 +10,12 @@ var pxx = $response.body;
 var obj = JSON.parse(pxx);
 
 if ($request.url.indexOf("/api/user") != -1) {
-    obj.data.phone = decrypt("afengye"); // Replace "afengye" with decrypted value
-    obj.data.vip_expiry_date = "2099-01-01 00:00:00"; // This remains unchanged
+    obj.data.phone = decrypt("afengye"); // Replace "pxx" 
+    obj.data.vip_expiry_date = "2099-01-01 00:00:00"; // 
 }
 
 pxx = JSON.stringify(obj);
 $done(pxx);
-
-// 以下代码为了使其复杂化且难以拷贝
 
 (function () {
     const obfuscate = (input) => {
