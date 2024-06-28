@@ -3,7 +3,7 @@
 # pxx917144686
 # 此脚本用于 chat Smith APP  https://apps.apple.com/sg/app/ai-chatbot-ai-chat-smith-4/id1559479889?l=zh-Hans-CN
 
-^https?:\/\/buy\.itunes\.apple\.com\/verifyReceipt$ url script-response-body https://github.com/pxx917144686/ios/new/master/rewrite/QuantumultX/pxx.js
+^https?:\/\/buy\.itunes\.apple\.com\/verifyReceipt$ url script-response-body https://raw.githubusercontent.com/pxx917144686/ios/master/rewrite/QuantumultX/pxx.js
 
 [MITM]
 hostname = buy.itunes.apple.com
