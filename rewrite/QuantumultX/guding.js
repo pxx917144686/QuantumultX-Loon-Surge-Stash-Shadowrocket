@@ -1,24 +1,24 @@
 /*
 
-站在巨人的肩膀上～抄袭guding  @pxx
+站在巨人的肩膀上～抄袭骨钉  @pxx
 
 [rewrite_local]
-^https?:\/\/api\.revenuecat\.com\/v1\/(subscribers\/[^\/]+$|receipts$) url script-response-body https://raw.githubusercontent.com/pxx917144686/ios/master/rewrite/QuantumultX/guding.js
-//^https?:\/\/api\.revenuecat\.com\/v1\/(subscribers\/[^\/]+$|receipts$) url script-request-header https://raw.githubusercontent.com/pxx917144686/ios/master/rewrite/QuantumultX/guding.js
+^https?:\/\/api\.revenuecat\.com\/v1\/(subscribers\/[^\/]+$|receipts$) url script-response-body https://raw.githubusercontent.com/pxx917144686/ios/edit/master/rewrite/QuantumultX/guding.js
+//^https?:\/\/api\.revenuecat\.com\/v1\/(subscribers\/[^\/]+$|receipts$) url script-request-header https://raw.githubusercontent.com/pxx917144686/ios/edit/master/rewrite/QuantumultX/guding.js
 
 [MITM]
 hostname = api.revenuecat.com
 
 */
-const guding = {};
-const guding6 = JSON.parse(typeof $response != "undefined" && $response.body || null);
+const pxx917144686 = {};
+const 6666666666 = JSON.parse(typeof $response != "undefined" && $response.body || null);
 if (typeof $response == "undefined") {
   delete $request.headers["x-revenuecat-etag"];
   delete $request.headers["X-RevenueCat-ETag"];
-  guding.headers = $request.headers;
-} else if (guding6 && guding6.subscriber) {
-  guding6.subscriber.subscriptions = guding6.subscriber.subscriptions || {};
-  guding6.subscriber.entitlements = guding6.subscriber.entitlements || {};
+  pxx917144686.headers = $request.headers;
+} else if (6666666666 && 6666666666.subscriber) {
+  6666666666.subscriber.subscriptions = 6666666666.subscriber.subscriptions || {};
+  6666666666.subscriber.entitlements = 6666666666.subscriber.entitlements || {};
   var headers = {};
   for (var key in $request.headers) {
   const reg = /^[a-z]+$/;
@@ -42,7 +42,7 @@ if (typeof $response == "undefined") {
     'G%20E%20I%20S%20T':{ name: 'memorado_premium', id: 'com.memorado.subscription.yearly.v2'},
     'PinPaper':{ name: 'allaccess', id: 'Paper_Lifetime'},
     'Lungy':{ name: 'Deluxe', id: 'lungy_1999_lifetime'},
-    'MOZE':{ name: 'Premium', id: 'https://t.me/Guding88'},
+    'MOZE':{ name: 'Premium', id: 'https://t.me/pxx91714468688'},
     'Monefy':{ name: 'monefy_premium', id: 'monefy.yearlysubscription'},
     'OffScreen':{ name: 'Entitlement.Pro', id: 'tech.miidii.offscreen.subscription.year.intro.first_year_discount'},
     'Paper':{ name: 'pro', id: 'com.fiftythree.paper.pro_12'},
@@ -168,7 +168,7 @@ if (typeof $response == "undefined") {
     //'ShellBoxKit':{ name: 'pro', id: 'ShellBoxKit.Lifetime'},
     'Ask':{ name: 'Perplexity Pro', id: 'pro_200_yr_1w_new'},
     'PipDoc':{ name: 'pro', id: 'pipdoc_pro_lifetime'},
-    'Tyson':{ name: 'pro', id: 'lux_7999_1y_2w0'},//来自大圣的徕卡
+    'Tyson':{ name: 'pro', id: 'lux_7999_1y_2w0'},
     'Yosum':{ name: 'Premium', id: 'terrykuo.co.yosum.premiummembership'},
     'iplayTV':{ name: 'com.ll.btplayer.12', id: 'com.ll.btplayer.12'},
     'TQBrowser':{ name: 'pro', id: 'com.tk.client.lifetime'},
@@ -188,7 +188,7 @@ if (typeof $response == "undefined") {
 
     //以下内容来自卑鄙的Baby（@Yu9191）
     'Spark':{ name: 'premium', id: 'spark_5999_1y_1w0'},
-    'WeeklyNote':{ name: 'org.zrey.weeklynote', id: 'org.zrey.weeklynote.flash_lifetime'},//周周记
+    'WeeklyNote':{ name: 'org.zrey.weeklynote', id: 'org.zrey.weeklynote.flash_lifetime'},
     'Text%20Workflow':{ name: 'pro', id: 'tw_99_1m'},
     
     //群友发的，不知道从谁那摘出来的
@@ -208,13 +208,13 @@ if (typeof $response == "undefined") {
   for (const i in UAMappings) {
     if (new RegExp(`^${i}`, 'i').test(UA)) {
       const { name, id } = UAMappings[i];
-      guding6.subscriber.subscriptions = {};
-      guding6.subscriber.subscriptions[id] = data;
-      guding6.subscriber.entitlements[name] = JSON.parse(JSON.stringify(data));
-      guding6.subscriber.entitlements[name].product_identifier = id;
+      6666666666.subscriber.subscriptions = {};
+      6666666666.subscriber.subscriptions[id] = data;
+      6666666666.subscriber.entitlements[name] = JSON.parse(JSON.stringify(data));
+      6666666666.subscriber.entitlements[name].product_identifier = id;
       break;
     }
   }
-  guding.body = JSON.stringify(guding6);
+  pxx917144686.body = JSON.stringify(6666666666);
 }
-$done(guding);
+$done(pxx917144686);
