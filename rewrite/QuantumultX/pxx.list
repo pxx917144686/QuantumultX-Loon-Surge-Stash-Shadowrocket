@@ -1,7 +1,13 @@
+[general]
+bypass-system = true
+
 [policy]
 static=兴业银行, DIRECT
 
 [filter_local]
+USER-AGENT,com.industrialbank.android,DIRECT
+USER-AGENT,IndustrialBank,DIRECT
+
 DOMAIN-SUFFIX,bank-of-china.com,兴业银行
 DOMAIN-SUFFIX,bankofchina.com,兴业银行
 DOMAIN-SUFFIX,boc.cn,兴业银行
