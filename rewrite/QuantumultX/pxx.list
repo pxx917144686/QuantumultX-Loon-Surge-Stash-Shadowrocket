@@ -1,5 +1,5 @@
 [policy]
-static=兴业银行, policy-path=DIRECT, BankRules
+static=兴业银行, DIRECT
 
 [filter_local]
 DOMAIN-SUFFIX,bank-of-china.com,兴业银行
