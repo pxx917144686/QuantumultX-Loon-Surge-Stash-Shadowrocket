@@ -1,26 +1,98 @@
 /* 
-芒果TV 2024.7.29
+芒果TV 2024.08.14    @拷贝Yu9191的数据
+
 适配了Mac版本iPad版本 
 脚本仅供学习和个人使用，不得用于商业目的或其他非法用途
-可以直接使用Walala的净化广告以及包含会员数据的脚本
-https://raw.githubusercontent.com/RuCu6/QuanX/main/Rewrites/Cube/cnftp.snippet
-感谢@RuCu6
+
+
+
 
 [rewrite_local]
-^http[s]?:\/\/mobile\.api\.mgtv\.com\/v[0-9]\/(playlist|video\/album|video\/relative|video\/list).*$ url script-request-header https://raw.githubusercontent.com/Yu9191/Rewrite/main/mgtv1.js
-https://mobile-stream.api.mgtv.com/v1/video/source? url script-request-header https://raw.githubusercontent.com/Yu9191/Rewrite/main/MGTV.js
-https://nuc.api.mgtv.com/GetUserInfo url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/main/mgtv.js
-https://mobile-stream.api.mgtv.com/v1/video/source url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/main/mgtv.js
+^http[s]?:\/\/mobile\.api\.mgtv\.com\/v[0-9]\/(playlist|video\/album|video\/relative|video\/list).*$ url script-request-header https://raw.githubusercontent.com/pxx917144686/ios/master/rewrite/QuantumultX/MG1.js
+https://mobile-stream.api.mgtv.com/v1/video/source? url script-request-header https://raw.githubusercontent.com/pxx917144686/ios/master/rewrite/QuantumultX/MG.js
+https://nuc.api.mgtv.com/GetUserInfo url script-response-body https://raw.githubusercontent.com/pxx917144686/ios/master/rewrite/QuantumultX/MG.js
+https://mobile-stream.api.mgtv.com/v1/video/source url script-response-body https://raw.githubusercontent.com/pxx917144686/ios/master/rewrite/QuantumultX/MG.js
 
 #港区
-^https://mobile.api.mgtv.com/v8/video/getSource url script-request-header https://raw.githubusercontent.com/Yu9191/Rewrite/main/MGTV.js
+^https://mobile.api.mgtv.com/v8/video/getSource url script-request-header https://raw.githubusercontent.com/pxx917144686/ios/master/rewrite/QuantumultX/MG.js
 
 #播放页开通提示移除
 http://vip.bz.mgtv.com/client/dynamic_entry url reject
-https://pcc.api.mgtv.com/video/getSource url script-request-header https://raw.githubusercontent.com/Yu9191/Rewrite/main/MGTV.js
-https://pad.api.mgtv.com/v8/video/getSource url script-request-header https://raw.githubusercontent.com/Yu9191/Rewrite/main/MGTV.js
+https://pcc.api.mgtv.com/video/getSource url script-request-header https://raw.githubusercontent.com/pxx917144686/ios/master/rewrite/QuantumultX/MG.js
+https://pad.api.mgtv.com/v8/video/getSource url script-request-header https://raw.githubusercontent.com/pxx917144686/ios/master/rewrite/QuantumultX/MG.js
 [mitm] 
 hostname = *.mgtv.com, pad.api.mgtv.com, pcc.api.mgtv.com
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 */
 
