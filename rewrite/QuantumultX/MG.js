@@ -4,7 +4,8 @@
 适配了Mac版本iPad版本 
 脚本仅供学习和个人使用，不得用于商业目的或其他非法用途
 
-
+https://raw.githubusercontent.com/RuCu6/QuanX/main/Rewrites/Cube/cnftp.snippet
+感谢@RuCu6
 
 
 [rewrite_local]
