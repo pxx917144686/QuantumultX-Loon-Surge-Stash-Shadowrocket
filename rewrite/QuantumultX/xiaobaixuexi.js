@@ -5,15 +5,15 @@
 小白试卷宝 1.28
 
 会员重写具有时效性,如果失效请用之前的"捕获"版本
-https://raw.githubusercontent.com/Yu9191/Script/main/shijuan.js
+https://raw.githubusercontent.com/pxx917144686/ios/master/rewrite/QuantumultX/xiaobaixuexi.js
 
 [rewrite_local]
 
 #小白学习打印
-https://api.xbxxhz.com/graphql url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/main/xiaobaixuexi.js
+https://api.xbxxhz.com/graphql url script-response-body https://raw.githubusercontent.com/pxx917144686/ios/master/rewrite/QuantumultX/xiaobaixuexi.js
 
 #小白智慧打印
-https://epbox.gongfudou.com/graphql url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/main/xiaobaixuexi.js
+https://epbox.gongfudou.com/graphql url script-response-body https://raw.githubusercontent.com/pxx917144686/ios/master/rewrite/QuantumultX/xiaobaixuexi.js
 
 #开屏广告 需清理缓存
 ^https:\/\/api\.xbxxhz\.com\/big_data\/v1\/home_pages url reject
@@ -21,6 +21,32 @@ https://epbox.gongfudou.com/graphql url script-response-body https://raw.githubu
 [mitm] 
 
 hostname = api.xbxxhz.com, epbox.gongfudou.com
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 */
 
