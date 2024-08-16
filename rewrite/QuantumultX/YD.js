@@ -1,11 +1,11 @@
 /*
 
-项目名称：网易有道词典
-使用声明：仅供参考，禁转载与售卖！
+数据拷贝于 YU991
+
 
 
 [rewrite_local]
-^https:\/\/dict\.youdao\.com\/vip\/user\/status url script-response-body https://raw.githubusercontent.com/Yu9191/Rewrite/main/wyydcd.js
+^https:\/\/dict\.youdao\.com\/vip\/user\/status url script-response-body https://raw.githubusercontent.com/pxx917144686/ios/master/rewrite/QuantumultX/YD.js
 # 翻译   广告均由 安妮 分享 
 ^https:\/\/dict\.youdao\.com\/course\/tab\/translateTab url reject-dict
 
