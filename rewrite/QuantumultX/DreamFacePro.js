@@ -1,22 +1,16 @@
 /******************************************
- * @Name 𝐷𝑟𝑒𝑎𝑚𝐹𝑎𝑐𝑒
- * @Description 𝑈𝑛𝑙𝑜𝑐𝑘 𝑃𝑟𝑜 𝐹𝑒𝑎𝑡𝑢𝑟𝑒𝑠
- * @Channel https://t.me/yqc_123
- * @Author 𝐻𝑎𝑢𝑠𝑑𝑜𝑟𝑓𝑓
- * @Update 20240624
- * @Link http://t.cn/A6QiX08k
- * @Version 3.11.0
+ * DreamFacePro
+ * pxx917144686
+ * apple商店：https://apps.apple.com/us/app/dreamface-ai-video-generator/id1624172324
  ******************************************
 [rewrite_local]
-# > 𝐷𝑟𝑒𝑎𝑚𝐹𝑎𝑐𝑒 𝐶𝑟𝑎𝑐𝑘 𝑃𝑟𝑜
+# > DreamFacePro 破解
 ^https?:\/\/dreamfaceapp\.com\/df-server\/user\/save_user_login$ url script-response-body https://gist.githubusercontent.com/yqc007/4fc79102559fa075f36141587cc686ab/raw/DreamFacePro.js
 [mitm]
 hostname = dreamfaceapp.com
 
 /******************************************
- * 配置管理模块
- * -------------------------------------- *
- * 作用: 用于统一管理脚本的各项配置
+ * 圈X重写
  ******************************************/
 
 const config = {
