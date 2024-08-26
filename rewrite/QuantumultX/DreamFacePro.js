@@ -1,5 +1,8 @@
+/******************************************
+ * @Name 𝐷𝑟𝑒𝑎𝑚𝐹𝑎𝑐𝑒
+ ******************************************
 [rewrite_local]
-# > DreamFacePro
+# > 𝐷𝑟𝑒𝑎𝑚𝐹𝑎𝑐𝑒 𝐶𝑟𝑎𝑐𝑘 𝑃𝑟𝑜
 ^https?:\/\/dreamfaceapp\.com\/df-server\/user\/save_user_login$ url script-response-body https://raw.githubusercontent.com/pxx917144686/ios/master/rewrite/QuantumultX/DreamFacePro.js
 [mitm] 
 hostname = dreamfaceapp.com
