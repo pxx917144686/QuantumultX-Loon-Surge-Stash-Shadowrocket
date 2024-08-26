@@ -1,13 +1,80 @@
 /******************************************
- * DreamFacePro
- * pxx917144686
- * -------------------------------------- *
- * apple商店：https://apps.apple.com/us/app/dreamface-ai-video-generator/id1624172324
+ * @Name 𝐷𝑟𝑒𝑎𝑚𝐹𝑎𝑐𝑒
+ * @Description 𝑈𝑛𝑙𝑜𝑐𝑘 𝑃𝑟𝑜 𝐹𝑒𝑎𝑡𝑢𝑟𝑒𝑠
+ * @Channel https://t.me/yqc_123
+ * @Author 𝐻𝑎𝑢𝑠𝑑𝑜𝑟𝑓𝑓
+ * @Update 20240624
+ * @Link http://t.cn/A6QiX08k
+ * @Version 3.11.0
  ******************************************
 [rewrite_local]
-^https?:\/\/dreamfaceapp\.com\/df-server\/user\/save_user_login$ url script-response-body https://raw.githubusercontent.com/pxx917144686/ios/master/rewrite/QuantumultX/DreamFacePro.js
-[mitm] 
+# > 𝐷𝑟𝑒𝑎𝑚𝐹𝑎𝑐𝑒 𝐶𝑟𝑎𝑐𝑘 𝑃𝑟𝑜
+^https?:\/\/dreamfaceapp\.com\/df-server\/user\/save_user_login$ url script-response-body https://gist.githubusercontent.com/yqc007/4fc79102559fa075f36141587cc686ab/raw/DreamFacePro.js
+[mitm]
 hostname = dreamfaceapp.com
-******************************************/
 
-var r,x,n=["dmlwX3Byb2R1Y3RfaWQ=","c3RyaW5naWZ5","cGFyc2U=","Ym9keQ==","ZGF0YQ==","cmlnaHRz","cmVuZXdhbA==","dmlwX3R5cGU=","dmlwX2xhYmVs","dmlwX3JlbWFpbmRlcl9kYXk=","ZXhwaXJlc19kYXRl","aGF2ZV90cmlhbA==","ZXhwaXJlc19kYXRlX2Zvcm1hdA==","Mjk5OS0xMi0yOCAwOTowMDowMC4wMDA="];r=n,x=296,function(x){for(;--x;)r.push(r.shift())}(++x);var t,o=function(r,x){r-=0;var t=n[r];void 0===o.ysZNba&&(!function(){var r;try{var x=Function('return (function() {}.constructor("return this")( ));');r=x()}catch(x){r=window}r.atob||(r.atob=function(r){for(var x,n,t=String(r).replace(/=+$/,""),o=0,c=0,a="";n=t.charAt(c++);~n&&(x=o%4?64*x+n:n,o++%4)?a+=String.fromCharCode(255&x>>(-2*o&6)):0)n="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=".indexOf(n);return a})}(),o.TddQMO=function(r){for(var x=atob(r),n=[],t=0,o=x.length;t<o;t++)n+="%"+("00"+x.charCodeAt(t).toString(16)).slice(-2);return decodeURIComponent(n)},o.eLythI={},o.ysZNba=!0);var c=o.eLythI[r];return void 0===c?(t=o.TddQMO(t),o.eLythI[r]=t):t=c,t};t=JSON[o("0x0")]($response[o("0x1")]),t[o("0x2")][o("0x3")]={},t[o("0x2")][o("0x3")][o("0x4")]=!1,t[o("0x2")][o("0x3")][o("0x5")]="TRY_YEAR_PACKAGE",t[o("0x2")][o("0x3")][o("0x6")]=!0,t[o("0x2")][o("0x3")][o("0x7")]=999999,t[o("0x2")][o("0x3")][o("0x8")]=32503338e6,t[o("0x2")][o("0x3")][o("0x9")]=!1,t[o("0x2")][o("0x3")][o("0xa")]=o("0xb"),t[o("0x2")][o("0x3")][o("0xc")]="96",$done({body:JSON[o("0xd")](t)});
+/******************************************
+ * 配置管理模块
+ * -------------------------------------- *
+ * 作用: 用于统一管理脚本的各项配置
+ ******************************************/
+
+const config = {
+    VIP_PRODUCT_ID: "TRY_YEAR_PACKAGE",        // 产品 ID
+    VIP_TYPE: "YEAR",                          // VIP 类型
+    VIP_LABEL: "Pro Membership",               // VIP 标签
+    VIP_REMINDER_DAY: 999999,                  // 提醒天数
+    EXPIRES_DATE: "2099-12-28T09:00:00.000Z",  // 到期日期
+    EXPIRES_DATE_FORMAT: "2099-12-28 09:00:00",// 格式化到期日期
+    HAVE_TRIAL: false,                         // 是否有试用
+    RENEWAL: true                              // 是否续订
+};
+
+/******************************************
+ * 函数: modifyResponse
+ * 作用: 修改原始响应数据为 VIP 信息
+ ******************************************/
+
+/**
+ * 修改响应数据，返回 VIP 订阅信息
+ * @param {string} responseBody - 原始 JSON 响应体字符串
+ * @returns {string} 修改后的 JSON 响应体字符串
+ */
+function modifyResponse(responseBody) {
+    try {
+        const response = JSON.parse(responseBody);
+        
+        response.vip_product_id = config.VIP_PRODUCT_ID;
+        response.data = {
+            "rights": {
+                "renewal": config.RENEWAL,
+                "vip_type": config.VIP_TYPE,
+                "vip_label": config.VIP_LABEL,
+                "vip_reminder_day": config.VIP_REMINDER_DAY,
+                "expires_date": config.EXPIRES_DATE,
+                "have_trial": config.HAVE_TRIAL,
+                "expires_date_format": config.EXPIRES_DATE_FORMAT
+            }
+        };
+        
+        return JSON.stringify(response);
+
+    } catch (error) {
+        console.error("修改 DreamFace 响应时发生错误", error);
+        return responseBody; // 如果发生错误，返回原始响应数据
+    }
+}
+
+/******************************************
+ * 主流程
+ ******************************************/
+
+// 调用 modifyResponse 函数并返回结果
+const modifiedResponse = modifyResponse($response.body);
+$done({
+    body: modifiedResponse
+});
+
+/******************************************
+ * 结束
+ ******************************************/
