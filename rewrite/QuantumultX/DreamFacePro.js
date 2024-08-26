@@ -4,8 +4,7 @@
  * apple商店：https://apps.apple.com/us/app/dreamface-ai-video-generator/id1624172324
  ******************************************
 [rewrite_local]
-# > DreamFacePro 破解
-^https?:\/\/dreamfaceapp\.com\/df-server\/user\/save_user_login$ url script-response-body https://gist.githubusercontent.com/yqc007/4fc79102559fa075f36141587cc686ab/raw/DreamFacePro.js
+^https?:\/\/dreamfaceapp\.com\/df-server\/user\/save_user_login$ url script-response-body https://raw.githubusercontent.com/pxx917144686/ios/master/rewrite/QuantumultX/DreamFacePro.js
 [mitm]
 hostname = dreamfaceapp.com
 
