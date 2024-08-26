@@ -1,10 +1,10 @@
 /******************************************
  * DreamFacePro
  * pxx917144686
+ * -------------------------------------- *
  * apple商店：https://apps.apple.com/us/app/dreamface-ai-video-generator/id1624172324
  ******************************************
 [rewrite_local]
-# > 𝐷𝑟𝑒𝑎𝑚𝐹𝑎𝑐𝑒 𝐶𝑟𝑎𝑐𝑘 𝑃𝑟𝑜
 ^https?:\/\/dreamfaceapp\.com\/df-server\/user\/save_user_login$ url script-response-body https://raw.githubusercontent.com/pxx917144686/ios/master/rewrite/QuantumultX/DreamFacePro.js
 [mitm]
 hostname = dreamfaceapp.com
