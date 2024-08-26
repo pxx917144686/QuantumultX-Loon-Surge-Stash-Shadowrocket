@@ -1,12 +1,75 @@
-/******************************************
- * DreamFacePro
+/*
+******************************************
+ * DreamFacePro Crack
  * pxx917144686
- * apple商店：https://apps.apple.com/us/app/dreamface-ai-video-generator/id1624172324
+ * Apple Store: https://apps.apple.com/us/app/dreamface-ai-video-generator/id1624172324
  ******************************************
+
 [rewrite_local]
 ^https?:\/\/dreamfaceapp\.com\/df-server\/user\/save_user_login$ url script-response-body https://raw.githubusercontent.com/pxx917144686/ios/master/rewrite/QuantumultX/DreamFacePro.js
-[mitm] 
-hostname = dreamfaceapp.com
-******************************************/
 
-var r,x,n=["dmlwX3Byb2R1Y3RfaWQ=","c3RyaW5naWZ5","cGFyc2U=","Ym9keQ==","ZGF0YQ==","cmlnaHRz","cmVuZXdhbA==","dmlwX3R5cGU=","dmlwX2xhYmVs","dmlwX3JlbWFpbmRlcl9kYXk=","ZXhwaXJlc19kYXRl","aGF2ZV90cmlhbA==","ZXhwaXJlc19kYXRlX2Zvcm1hdA==","Mjk5OS0xMi0yOCAwOTowMDowMC4wMDA="];r=n,x=296,function(x){for(;--x;)r.push(r.shift())}(++x);var t,o=function(r,x){r-=0;var t=n[r];void 0===o.ysZNba&&(!function(){var r;try{var x=Function('return (function() {}.constructor("return this")( ));');r=x()}catch(x){r=window}r.atob||(r.atob=function(r){for(var x,n,t=String(r).replace(/=+$/,""),o=0,c=0,a="";n=t.charAt(c++);~n&&(x=o%4?64*x+n:n,o++%4)?a+=String.fromCharCode(255&x>>(-2*o&6)):0)n="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=".indexOf(n);return a})}(),o.TddQMO=function(r){for(var x=atob(r),n=[],t=0,o=x.length;t<o;t++)n+="%"+("00"+x.charCodeAt(t).toString(16)).slice(-2);return decodeURIComponent(n)},o.eLythI={},o.ysZNba=!0);var c=o.eLythI[r];return void 0===c?(t=o.TddQMO(t),o.eLythI[r]=t):t=c,t};t=JSON[o("0x0")]($response[o("0x1")]),t[o("0x2")][o("0x3")]={},t[o("0x2")][o("0x3")][o("0x4")]=!1,t[o("0x2")][o("0x3")][o("0x5")]="TRY_YEAR_PACKAGE",t[o("0x2")][o("0x3")][o("0x6")]=!0,t[o("0x2")][o("0x3")][o("0x7")]=999999,t[o("0x2")][o("0x3")][o("0x8")]=32503338e6,t[o("0x2")][o("0x3")][o("0x9")]=!1,t[o("0x2")][o("0x3")][o("0xa")]=o("0xb"),t[o("0x2")][o("0x3")][o("0xc")]="96",$done({body:JSON[o("0xd")](t)});
+[mitm]
+hostname = dreamfaceapp.com
+******************************************
+*/
+
+// Base64 编码字符数组
+const BASE64_CHARS = [
+    "dmlwX3Byb2R1Y3RfaWQ=", // "vip_product_id"
+    "c3RyaW5naWZ5",         // "stringify"
+    "cGFyc2U=",             // "parse"
+    "Ym9keQ==",             // "body"
+    "ZGF0YQ==",             // "data"
+    "cmlnaHRz",             // "rights"
+    "cmVuZXdhbA==",        // "renewal"
+    "dmlwX3R5cGU=",         // "vip_type"
+    "dmlwX2xhYmVs",         // "vip_label"
+    "dmlwX3JlbWFpbmRlcl9kYXk=", // "vip_reminder_day"
+    "ZXhwaXJlc19kYXRl",     // "expires_date"
+    "aGF2ZV90cmlhbA==",     // "have_trial"
+    "ZXhwaXJlc19kYXRlX2Zvcm1hdA==", // "expires_date_format"
+    "Mjk5OS0xMi0yOCAwOTowMDowMC4wMDA=" // "2999-12-28 09:00:00.000"
+];
+
+// 解码 Base64 字符串
+const decodeBase64 = (encodedStr) => {
+    return atob(encodedStr)
+        .split("")
+        .map(char => "%" + ("00" + char.charCodeAt(0).toString(16)).slice(-2))
+        .join("");
+};
+
+// 获取解码后的字符串
+const decode = (index) => {
+    let decodedStr = BASE64_CHARS[index];
+    return decodeBase64(decodedStr);
+};
+
+// 修改响应体
+const modifyResponse = (responseBody) => {
+    try {
+        const response = JSON.parse(responseBody);
+
+        response.data = {
+            rights: {
+                renewal: true,
+                vip_type: "YEAR",
+                vip_label: "Pro Membership",
+                vip_reminder_day: 999999,
+                expires_date: "2099-12-28T09:00:00.000Z",
+                have_trial: false,
+                expires_date_format: "2099-12-28 09:00:00"
+            }
+        };
+
+        return JSON.stringify(response);
+
+    } catch (error) {
+        console.error("Error modifying response", error);
+        return responseBody; // Return original response in case of error
+    }
+};
+
+// 处理并返回修改后的响应
+const updatedResponse = modifyResponse($response.body);
+$done({ body: updatedResponse });
