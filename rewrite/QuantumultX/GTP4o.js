@@ -1,5 +1,5 @@
 /*
-GTP4o 
+GTP4o + HD版  数据 拷贝于 YU9191 
 
 [rewrite_local]
 
@@ -11,7 +11,7 @@ hostname = nichousha.sjrjyffs.top
 */
 if ($request.url.includes('api/app/user/getCurrentInfo')) {
     let body = JSON.parse($response.body);
-    Object.assign(body.data, { vipStatus: "1", nickname: "Baby", vipLabel: "1", imgNum: 9999 });
+    Object.assign(body.data, { vipStatus: "1", nickname: "Baby", vipLabel: "1", imgNum: 6666666666666 });
     $done({ body: JSON.stringify(body) });
 } else {
     $done({});
