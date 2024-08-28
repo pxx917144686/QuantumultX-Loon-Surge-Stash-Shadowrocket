@@ -1,5 +1,5 @@
 /*
-GTP4o + HD版  数据 拷贝于 YU9191 
+GTP4o + HD版  商店下载地址：https://apps.apple.com/us/app/ai%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E8%81%8A%E5%A4%A9%E6%9C%BA%E5%99%A8%E4%BA%BA/id6449283733?l=zh-Hans-CN  
 
 [rewrite_local]
 
@@ -11,7 +11,7 @@ hostname = nichousha.sjrjyffs.top
 */
 if ($request.url.includes('api/app/user/getCurrentInfo')) {
     let body = JSON.parse($response.body);
-    Object.assign(body.data, { vipStatus: "1", nickname: "Baby", vipLabel: "1", imgNum: pxx917144686 });
+    Object.assign(body.data, { vipStatus: "1", nickname: "Baby", vipLabel: "1", imgNum: 123456789 });
     $done({ body: JSON.stringify(body) });
 } else {
     $done({});
