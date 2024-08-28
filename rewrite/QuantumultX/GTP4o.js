@@ -11,7 +11,7 @@ hostname = nichousha.sjrjyffs.top
 */
 if ($request.url.includes('api/app/user/getCurrentInfo')) {
     let body = JSON.parse($response.body);
-    Object.assign(body.data, { vipStatus: "1", nickname: "Baby", vipLabel: "1", imgNum: 6666666666666 });
+    Object.assign(body.data, { vipStatus: "1", nickname: "Baby", vipLabel: "1", imgNum: pxx917144686 });
     $done({ body: JSON.stringify(body) });
 } else {
     $done({});
