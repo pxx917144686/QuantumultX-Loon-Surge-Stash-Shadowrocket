@@ -1,10 +1,10 @@
 /*
-GTP4o+GTP4o_HD版本 数据拷贝于 YU9191   @pxx917144686 apples商店链接：https://apps.apple.com/us/app/chatgp4o-%E5%AE%98%E6%96%B9%E4%B8%AD%E6%96%87%E7%89%88ai%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E6%9C%BA%E5%99%A8%E4%BA%BA/id6449283733?l=zh-Hans-CN
+GTP4o 
 
 [rewrite_local]
 
 https://nichousha.sjrjyffs.top/api/img/aiSketch url script-request-body https://raw.githubusercontent.com/pxx917144686/ios/master/rewrite/QuantumultX/GTP4ohd.js
-https://nichousha.sjrjyffs.top/api/app/user/getCurrentInfo url script-response-body https://raw.githubusercontent.com/pxx917144686/ios/master/rewrite/QuantumultX/GTP4o+HD.js
+https://nichousha.sjrjyffs.top/api/app/user/getCurrentInfo url script-response-body https://raw.githubusercontent.com/pxx917144686/ios/master/rewrite/QuantumultX/GTP4o.js
 
 [mitm]
 hostname = nichousha.sjrjyffs.top
