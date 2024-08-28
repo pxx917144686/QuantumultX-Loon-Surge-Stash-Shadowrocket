@@ -1,5 +1,5 @@
 /*
-GTP4o + HD版 @ pxx917144686 商店下载地址：https://apps.apple.com/us/app/ai%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E8%81%8A%E5%A4%A9%E6%9C%BA%E5%99%A8%E4%BA%BA/id6449283733?l=zh-Hans-CN  
+GTP4o + HD版 pxx917144686 商店下载地址：https://apps.apple.com/us/app/ai%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD%E8%81%8A%E5%A4%A9%E6%9C%BA%E5%99%A8%E4%BA%BA/id6449283733?l=zh-Hans-CN  
 
 [rewrite_local]
 
