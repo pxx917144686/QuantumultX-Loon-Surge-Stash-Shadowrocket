@@ -5,7 +5,7 @@
  */
 
 [rewrite_local]
-^https:\/\/api\.merlinapp\.com\/.*\/user\/profile url script-response-body merlin_pro.js
+^https:\/\/api\.merlinapp\.com\/.*\/user\/profile url script-response-body https://raw.githubusercontent.com/pxx917144686/ios/master/rewrite/QuantumultX/merlin.js
 
 [mitm] 
 hostname = api.merlinapp.com
