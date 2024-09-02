@@ -133,9 +133,9 @@ if ($request.url.indexOf(hyzl) != -1){
       "pay_channel" : "苹果支付",
       "do_pop_up" : false
     };
-  chxm1023.data.vip_power_num = 999999;
-  chxm1023.data.new_power_num = 999999;
-  chxm1023.data.welfare_center_num = 999999;
+  chxm1023.data.vip_power_num = 9999;
+  chxm1023.data.new_power_num = 9999;
+  chxm1023.data.welfare_center_num = 9999;
   chxm1023.data.exchange_vip = 0;
   chxm1023.data.platform = 2;
   chxm1023.data.renew = 1;
@@ -305,11 +305,11 @@ if ($request.url.indexOf(sjs) != -1){
     "account_id" : "1666666666",
     "rights_info" : [
       {
-        "show_tips" : "抠图剩余张数：9999999 张 >",
+        "show_tips" : "抠图剩余张数：9999 张 >",
         "commodity_unit" : "2",
-        "link_words" : "9999999 张 >",
+        "link_words" : "9999 张 >",
         "commodity_id" : "shejishi.cutout",
-        "commodity_count" : 9999999
+        "commodity_count" : 9999
       }
     ]
   };
@@ -322,7 +322,7 @@ if ($request.url.indexOf(sjshf) != -1){
 if ($request.url.indexOf(kta) != -1){
   chxm1023.data = {
     "cutout" : {
-      "num_left" : 9999999
+      "num_left" : 9999
     }
   };
 }
