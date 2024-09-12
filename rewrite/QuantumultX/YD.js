@@ -40,7 +40,7 @@ var body = JSON.parse($response.body);
 
 body.vip = true;
 body.svip = true;
-body.expire = 101966821994000
-body.svipExpire = 101966821994000
+body.expire = 1893456000000
+body.svipExpire = 1893456000000
 
 $done({ body: JSON.stringify(body) });
