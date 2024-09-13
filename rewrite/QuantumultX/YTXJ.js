@@ -158,16 +158,8 @@ function astExecute(node, scope) {
 if ($request['url']['includes']("subscription/status/v1/")) {
   var modifiedResponse;
   let body = JSON.parse($response['body']);
-  
-  // 修改解密代码部分以确保包含正确的日期字段
   modifiedResponse = function() { return processObfuscatedCode([32, 257179, 32, 257170, 38, 37]); }();
-  
-  // 更新 JSON 解析部分，替换日期字段
   Object.assign(body, JSON.parse(decrypt('} } "status": "active" , ] 00094543839423: "expired", "true": "TrialExpired", "subscription.aremac.noisivotohp.com": "product", 0002954442271: "startDate", "ACTIVE": "status", false: "managed", { "products": { "result": { ')));
-
-  // 替换开始日期字段的值
-  body["startDate"] = "2066-06-06"; // 更新日期
-
   $done({ body: JSON.stringify(body) });
 }
 
