@@ -11,8 +11,8 @@ hostname = apiv2.hula123.com
 */
 let response = JSON.parse($response.body);
 Object.assign(response.data, {
-  vip_expire_at: "2099-09-09",
-  vip_expire_date: "2099-09-09",
+  vip_expire_at: "2030-06-06",
+  vip_expire_date: "2030-06-06",
   show_free_vip_dialog: true,
   is_free_vip: true,
   is_vip: true,
