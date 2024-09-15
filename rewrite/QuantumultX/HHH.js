@@ -1,10 +1,9 @@
-
 /*
 
 呼啦少儿英语
 
 [rewrite_local]
-https://apiv2.hula123.com/api/v1/me url script-response-body https://github.com/pxx917144686/ios/blob/master/rewrite/QuantumultX/HHH.js
+https://apiv2.hula123.com/api/v1/me url script-response-body https://raw.githubusercontent.com/pxx917144686/ios/master/rewrite/QuantumultX/HHH.js
 
 [mitm]
 hostname = apiv2.hula123.com
