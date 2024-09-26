@@ -7,40 +7,26 @@ http://106.54.2.168/emmoDiary/user/getUser url script-response-body https://raw.
 
 
 /*
-var obj = JSON.parse($response.body);
-obj = {"receipt": {
+var guding = {
+  "receipt": {
     "receipt_type": "Production",
-    "adam_id": 14789638028,
-    "app_item_id": 14789638028,
     "bundle_id": "com.sugarmo.ScrollClip",
-    "application_version": "3082",
-    "download_id": 9999999,
-    "version_external_identifier": 77777777,
-    "receipt_creation_date": "2020-10-21 06:58:34 Etc/GMT",
-    "receipt_creation_date_ms": "1603263514000",
-    "receipt_creation_date_pst": "2020-10-21 23:58:34 America/Los_Angeles",
-    "request_date": "2020-10-21 06:59:15 Etc/GMT",
-    "request_date_ms": "1603263514000",
-    "request_date_pst": "2020-10-21 23:59:15 America/Los_Angeles",
-    "original_purchase_date": "2020-10-21 06:50:28 Etc/GMT",
-    "original_purchase_date_ms": "1603263514000",
-    "original_purchase_date_pst": "2020-10-21 23:50:28 America/Los_Angeles",
-    "original_application_version": "3082",
-    "in_app": [{
-      "quantity": "1",
-      "product_id": "com.sugarmo.ScrollClip.pro",
-      "transaction_id": "999999999999",
-      "original_transaction_id": "999999999999",
-      "purchase_date": "2020-02-01 00:00:00 Etc/GMT",
-      "purchase_date_ms": "1580540314000",
-      "purchase_date_pst": "2020-02-21 00:00:00 America/Los_Angeles",
-      "original_purchase_date": "2020-02-01 00:00:00 Etc/GMT",
-      "original_purchase_date_ms": "1580540314000",
-      "original_purchase_date_pst": "2020-02-01 00:00:00 America/Los_Angeles",
-      "is_trial_period": "false"
-    }]
+    "in_app": [
+      {
+        "quantity": "1",
+        "purchase_date_ms": "1669275526000",
+        "transaction_id": "300001282466542",
+        "original_transaction_id": "300001282466542",
+        "product_id": "com.sugarmo.ScrollClip.pro",
+        "in_app_ownership_type": "PURCHASED",
+        "original_purchase_date_ms": "1669275526000"
+      }
+    ],
+    "application_version": "3206",
+    "original_purchase_date_ms": "1669275302000",
+    "original_application_version": "3206",
   },
+  "environment": "Production",
   "status": 0,
-  "environment": "Production"
-  }
-$done({body: JSON.stringify(obj)});
+}
+$done({ body: JSON.stringify(guding) });
