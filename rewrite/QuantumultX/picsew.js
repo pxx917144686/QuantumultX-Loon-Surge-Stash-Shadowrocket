@@ -8,26 +8,37 @@ http://106.54.2.168/emmoDiary/user/getUser url script-response-body https://raw.
 
 /*
 var obj = JSON.parse($response.body);
-obj = {
-    "receipt": {
+obj = {"receipt": {
     "receipt_type": "Production",
-    "adam_id": 1495046702,
-    "app_item_id": 1208145167,
+    "adam_id": 14789638028,
+    "app_item_id": 14789638028,
     "bundle_id": "com.sugarmo.ScrollClip",
     "application_version": "3082",
-    "download_id": 8888,
-    "version_external_identifier": 0,
-    "receipt_creation_date": "2020-09-13 13:07:00 Etc/GMT",
-    "receipt_creation_date_ms": "1600002420000",
-    "receipt_creation_date_pst": "2020-09-13 06:07:00 America/Los_Angeles",
-    "request_date": "2020-09-13 10:32:58 Etc/GMT",
-    "request_date_ms": "1599993178857",
-    "request_date_pst": "2020-09-13 02:43:08 America/Los_Angeles",
-    "original_purchase_date": "2020-05-27 14:46:29 Etc/GMT",
-    "original_purchase_date_ms": "1590590789000",
-    "original_purchase_date_pst": "2020-05-27 07:46:29 America/Los_Angeles",
-    "original_application_version": "9",
-    "in_app": []
+    "download_id": 9999999,
+    "version_external_identifier": 77777777,
+    "receipt_creation_date": "2020-10-21 06:58:34 Etc/GMT",
+    "receipt_creation_date_ms": "1603263514000",
+    "receipt_creation_date_pst": "2020-10-21 23:58:34 America/Los_Angeles",
+    "request_date": "2020-10-21 06:59:15 Etc/GMT",
+    "request_date_ms": "1603263514000",
+    "request_date_pst": "2020-10-21 23:59:15 America/Los_Angeles",
+    "original_purchase_date": "2020-10-21 06:50:28 Etc/GMT",
+    "original_purchase_date_ms": "1603263514000",
+    "original_purchase_date_pst": "2020-10-21 23:50:28 America/Los_Angeles",
+    "original_application_version": "3082",
+    "in_app": [{
+      "quantity": "1",
+      "product_id": "com.sugarmo.ScrollClip.pro",
+      "transaction_id": "999999999999",
+      "original_transaction_id": "999999999999",
+      "purchase_date": "2020-02-01 00:00:00 Etc/GMT",
+      "purchase_date_ms": "1580540314000",
+      "purchase_date_pst": "2020-02-21 00:00:00 America/Los_Angeles",
+      "original_purchase_date": "2020-02-01 00:00:00 Etc/GMT",
+      "original_purchase_date_ms": "1580540314000",
+      "original_purchase_date_pst": "2020-02-01 00:00:00 America/Los_Angeles",
+      "is_trial_period": "false"
+    }]
   },
   "status": 0,
   "environment": "Production"
