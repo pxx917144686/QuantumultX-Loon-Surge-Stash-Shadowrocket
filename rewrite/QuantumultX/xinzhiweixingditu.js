@@ -9,22 +9,23 @@
 hostname = a.xinzhi.space
 *******************************/
 
-var pxx = $response.body; 
-var obj = JSON.parse(pxx);
+var aFengYe = $response.body;
+var obj =  JSON.parse(aFengYe);
 
 var vipInfo = {
-  "vip_type": "永久会员",
-  "vip_expire": "2066-06-06 00:00:00", 
+  "vip_type":"永久会员",
+  "vip_expire": "2999-01-01 00:00:00",
   "is_vip": 1,
-  "vip_day": 66666
+  "vip_day": 99999
 }
 
 for (let key in obj.data) {
   if (vipInfo.hasOwnProperty(key)) {
-    obj.data[key] = vipInfo[key];
+     obj.data[key] = vipInfo[key]
   }
 }
 
-pxx = JSON.stringify(obj); 
-$done(pxx);
+
+aFengYe = JSON.stringify(obj);
+$done(aFengYe);
 
