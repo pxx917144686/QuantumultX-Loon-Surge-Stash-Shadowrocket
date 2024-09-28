@@ -1,13 +1,13 @@
-/*
- * 新知卫星地图  需要登录 破解有效    @ pxx917144686
-
-
-
+/******************************************
+ * 新知卫星地图  需要登录账号
+ * pxx917144686
+ * apple商店：https://apps.apple.com/us/app/%E6%96%B0%E7%9F%A5%E5%8D%AB%E6%98%9F%E5%9C%B0%E5%9B%BE-%E6%B5%B7%E6%8B%94%E6%9F%A5%E8%AF%A2/id1526845210?l=zh-Hans-CN
+ ******************************************
 [rewrite_local]
 ^https:\/\/a\.xinzhi\.space\/api\/User\/getUserByToken url script-response-body https://github.com/pxx917144686/ios/blob/master/rewrite/QuantumultX/xinzhiweixingditu.js
 [mitm] 
 hostname = a.xinzhi.space
-*******************************/
+*******************************************/
 
 var aFengYe = $response.body;
 var obj =  JSON.parse(aFengYe);
