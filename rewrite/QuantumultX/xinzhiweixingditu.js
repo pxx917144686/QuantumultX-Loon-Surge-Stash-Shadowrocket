@@ -12,15 +12,14 @@
 [mitm] 
 hostname = a.xinzhi.space
 *******************************************/
-
-var pxx = $response.body;
-var obj =  JSON.parse(pxx);
+var aFengYe = $response.body;
+var obj =  JSON.parse(aFengYe);
 
 var vipInfo = {
   "vip_type":"永久会员",
-  "vip_expire": "2066-06-06 00:00:00",
+  "vip_expire": "2999-01-01 00:00:00",
   "is_vip": 1,
-  "vip_day": 66666
+  "vip_day": 99999
 }
 
 for (let key in obj.data) {
@@ -28,6 +27,10 @@ for (let key in obj.data) {
      obj.data[key] = vipInfo[key]
   }
 }
+
+
+aFengYe = JSON.stringify(obj);
+$done(aFengYe);
 
 
 pxx = JSON.stringify(obj);
