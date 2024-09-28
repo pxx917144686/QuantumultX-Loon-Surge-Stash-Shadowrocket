@@ -12,8 +12,8 @@
 [mitm] 
 hostname = a.xinzhi.space
 *******************************************/
-var aFengYe = $response.body;
-var obj =  JSON.parse(aFengYe);
+var pxx = $response.body;
+var obj =  JSON.parse(pxx);
 
 var vipInfo = {
   "vip_type":"永久会员",
@@ -29,8 +29,8 @@ for (let key in obj.data) {
 }
 
 
-aFengYe = JSON.stringify(obj);
-$done(aFengYe);
+pxx = JSON.stringify(obj);
+$done(pxx);
 
 
 pxx = JSON.stringify(obj);
