@@ -3,20 +3,24 @@
  * pxx917144686
  * apple商店：https://apps.apple.com/us/app/%E6%96%B0%E7%9F%A5%E5%8D%AB%E6%98%9F%E5%9C%B0%E5%9B%BE-%E6%B5%B7%E6%8B%94%E6%9F%A5%E8%AF%A2/id1526845210?l=zh-Hans-CN
  ******************************************
+
+
+
+
 [rewrite_local]
-^https:\/\/a\.xinzhi\.space\/api\/User\/getUserByToken url script-response-body https://github.com/pxx917144686/ios/blob/master/rewrite/QuantumultX/xinzhiweixingditu.js
+^https:\/\/a\.xinzhi\.space\/api\/User\/getUserByToken url script-response-body https://raw.githubusercontent.com/pxx917144686/ios/refs/heads/master/rewrite/QuantumultX/xinzhiweixingditu.js
 [mitm] 
 hostname = a.xinzhi.space
 *******************************************/
 
-var aFengYe = $response.body;
-var obj =  JSON.parse(aFengYe);
+var pxx = $response.body;
+var obj =  JSON.parse(pxx);
 
 var vipInfo = {
   "vip_type":"永久会员",
-  "vip_expire": "2999-01-01 00:00:00",
+  "vip_expire": "2066-06-06 00:00:00",
   "is_vip": 1,
-  "vip_day": 99999
+  "vip_day": 66666
 }
 
 for (let key in obj.data) {
@@ -26,6 +30,6 @@ for (let key in obj.data) {
 }
 
 
-aFengYe = JSON.stringify(obj);
-$done(aFengYe);
+pxx = JSON.stringify(obj);
+$done(pxx);
 
