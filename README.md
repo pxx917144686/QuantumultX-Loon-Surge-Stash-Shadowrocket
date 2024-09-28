@@ -5,7 +5,7 @@
 
 https://github.com/pxx917144686/ios/tree/master/rule
 
-复写规则
+重写脚本
 
 https://github.com/pxx917144686/ios/tree/master/rewrite
 
