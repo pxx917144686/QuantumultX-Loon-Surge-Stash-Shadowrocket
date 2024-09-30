@@ -5,7 +5,7 @@ hostname = compass.xinzhi.space
 *******************************/
 
 var pxx = $response.body;
-var obj =  JSON.parse(pxx);
+var obj = JSON.parse(pxx);
 
 obj.data.is_vip = 1;
 
