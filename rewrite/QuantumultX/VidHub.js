@@ -1,7 +1,7 @@
 /*
  * VidHub 配置拦截脚本
 [rewrite_local]
-https://api.7littlemen.com/api/v1/me url script-response-body https://raw.githubusercontent.com/pxx917144686/ios/master/rewrite/QuantumultX/VidHub.js
+https://api.7littlemen.com/path/to/settings url script-response-body https://raw.githubusercontent.com/pxx917144686/ios/master/rewrite/QuantumultX/VidHub.js
 
 */
 
