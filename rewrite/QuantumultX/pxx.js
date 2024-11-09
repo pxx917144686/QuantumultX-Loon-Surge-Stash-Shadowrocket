@@ -9,6 +9,7 @@ App Store 链接:https://apps.apple.com/app/id6450694828
 hostname = api.revenuecat.com
 
 */
+
 // 订阅信息
 const expirationData = {
   "quantity": "1",
@@ -22,12 +23,11 @@ const expirationData = {
   "purchase_date": "2024-06-06 06:01:08 Etc/GMT",  // 接近当前日期
   "product_id": "com.example.app.subscription.premium_yearly",  // 更加真实的产品 ID
   "in_app_ownership_type": "PURCHASED",
-  "subscription_group_identifier": "20987432",  // 合理的订阅识符
+  "subscription_group_identifier": "20987432",  // 合理的订阅识别符
   "expires_date_ms": "1704064799000",  // 合理的未来时间
   "purchase_date_pst": "2024-06-06 06:06:06 America/Los_Angeles",  // 接近当前日期
   "original_purchase_date": "2024-06-06 06:01:08 Etc/GMT"  // 接近当前日期
 };
-
 
 // 应用列表
 const appList = [
