@@ -32,6 +32,7 @@ if (typeof $response == "undefined") {
       : $request.headers["User-Agent"].match(/^[%a-zA-Z0-9]+/)[0];
     
     const list = [
+      {"app_name":"1Blocker","bundle_id":"","product_id":"blocker.ios.iap.lifetime","entitlements":["premium"],"version":"5.8"},
       {"app_name": "Ereasy", "bundle_id": "background.remover.bg.eraser", "product_id": "app.pxx917144686", "entitlements": ["premium", "Full_access_app"], "version": "2.0.0" },
       
     ];
