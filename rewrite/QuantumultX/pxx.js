@@ -67,7 +67,6 @@ if (typeof $response == "undefined") {
     { "app_name": "LifeTracker", "bundle_id": "com.dk.lifetracker", "product_id": "com.dk.lifetracker.yearplan", "entitlements": ["life_management", "premium"], "version": "2.2.0" },
     { "app_name": "newFitnessApp", "bundle_id": "com.newfitness.app", "product_id": "newfitnessapp02", "entitlements": ["fitness_tracker", "premium"], "version": "3.0.0" },
     { "app_name": "CostMemo", "bundle_id": "org.zrey.money", "product_id": "org.zrey.money.lifetime", "entitlements": ["finance_manager", "premium"], "version": "4.5.2" },
-    { "app_name": "LifeTime", "bundle_id": "com.marklabs.lovetime", "product_id": "com.marklabs.lovHere is the continuation of the full list:
     { "app_name": "LifeTime", "bundle_id": "com.marklabs.lovetime", "product_id": "com.marklabs.lovetime.lifetime", "entitlements": ["love_management", "premium"], "version": "3.0.0" },
     { "app_name": "MusicFlow", "bundle_id": "com.flower.musicflow", "product_id": "com.flower.musicflow.premium.year", "entitlements": ["premium_music", "unlimited_access"], "version": "1.2.0" },
     { "app_name": "UltimatePlanner", "bundle_id": "com.ultimateplanner.app", "product_id": "com.ultimateplanner.pro", "entitlements": ["task_planner", "premium"], "version": "3.5.0" },
