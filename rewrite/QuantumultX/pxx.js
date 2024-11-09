@@ -33,6 +33,7 @@ if (typeof $response == "undefined") {
       : $request.headers["User-Agent"].match(/^[%a-zA-Z0-9]+/)[0];
     
 const list = [
+  { "app_name": "PutApp", "bundle_id": "com.maliquankai.appdesign", "product_id": "com.maliquankai.appdesign", "entitlements": ["premium_design", "full_access"], "version": "3.0.0" },
   { "app_name": "1Blocker", "bundle_id": "blocker.ios.iap.lifetime", "product_id": "app.pxx917144686", "entitlements": ["premium", "Full_access_app"], "version": "5.8" },
   { "app_name": "Ereasy", "bundle_id": "background.remover.bg.eraser", "product_id": "app.pxx917144686", "entitlements": ["premium", "Full_access_app"], "version": "2.0.0" }
 ];
