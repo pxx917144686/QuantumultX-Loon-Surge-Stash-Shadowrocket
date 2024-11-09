@@ -9,6 +9,18 @@ App Store 链接:https://apps.apple.com/app/id6450694828
 hostname = api.revenuecat.com
 
 */
+/*
+App Store 链接:https://apps.apple.com/app/id6450694828
+
+[rewrite_local]
+^https:\/\/api\.revenuecat\.com\/.+\/(receipts$|subscribers\/.+$) url script-response-body https://raw.githubusercontent.com/pxx917144686/ios/master/rewrite/QuantumultX/pxx.js
+^https:\/\/api\.revenuecat\.com\/.+\/(receipts$|subscribers\/.+$) url script-request-header https://raw.githubusercontent.com/pxx917144686/ios/master/rewrite/QuantumultX/pxx.js
+
+[MITM]
+hostname = api.revenuecat.com
+
+*/
+// 订阅信息
 const expirationData = {
   "quantity": "1",
   "purchase_date_ms": "1686002766000",  // 当前时间
@@ -34,9 +46,8 @@ const appList = [
 
 let obj = {};
 
-// 请求
+// 请求处理
 if (typeof $response === "undefined") {
-  // If the request is a header request, delete specific headers
   delete $request.headers["x-revenuecat-etag"];
   delete $request.headers["X-RevenueCat-ETag"];
   obj.headers = $request.headers;
@@ -45,28 +56,26 @@ if (typeof $response === "undefined") {
 
   if (body.subscriber) {
     const userAgent = $request.headers['User-Agent'] || '';
-    // Find the matched app using User-Agent or Bundle ID
     const matchedApp = appList.find(app => userAgent.includes(app.app_name) || userAgent.includes(app.bundle_id));
 
     if (matchedApp) {
-      // Set the correct product_id for the matched app
+      // APP ID
       expirationData.product_id = matchedApp.product_id;
       
-      // Ensure subscriber data structure exists
+      // 修改订阅信息
       let subscriber = body.subscriber;
       subscriber.subscriptions = subscriber.subscriptions || {};
       subscriber.entitlements = subscriber.entitlements || {};
-
-      // Inject subscription data for the matched app
+      
+      // 更新订阅数据
       subscriber.subscriptions[expirationData.product_id] = expirationData;
-
-      // Loop over entitlement keys and inject them with expiration data
+      
+      // 添加 entitlement 数据
       for (let entitlement of ['premium', 'Full_access_app']) {
         subscriber.entitlements[entitlement] = expirationData;
         subscriber.entitlements[entitlement].product_identifier = expirationData.product_id;
       }
 
-      // Return modified body as a response
       obj.body = JSON.stringify(body);
     }
   }
