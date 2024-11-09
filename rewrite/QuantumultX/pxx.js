@@ -9,17 +9,6 @@ App Store 链接:https://apps.apple.com/app/id6450694828
 hostname = api.revenuecat.com
 
 */
-/*
-App Store 链接:https://apps.apple.com/app/id6450694828
-
-[rewrite_local]
-^https:\/\/api\.revenuecat\.com\/.+\/(receipts$|subscribers\/.+$) url script-response-body https://raw.githubusercontent.com/pxx917144686/ios/master/rewrite/QuantumultX/pxx.js
-^https:\/\/api\.revenuecat\.com\/.+\/(receipts$|subscribers\/.+$) url script-request-header https://raw.githubusercontent.com/pxx917144686/ios/master/rewrite/QuantumultX/pxx.js
-
-[MITM]
-hostname = api.revenuecat.com
-
-*/
 // 订阅信息
 const expirationData = {
   "quantity": "1",
@@ -59,7 +48,7 @@ if (typeof $response === "undefined") {
     const matchedApp = appList.find(app => userAgent.includes(app.app_name) || userAgent.includes(app.bundle_id));
 
     if (matchedApp) {
-      // APP ID
+      // 设置正确的产品 ID
       expirationData.product_id = matchedApp.product_id;
       
       // 修改订阅信息
