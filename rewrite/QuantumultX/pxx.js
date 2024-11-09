@@ -9,8 +9,6 @@ App Store 链接:https://apps.apple.com/app/id6450694828
 hostname = api.revenuecat.com
 
 */
-
-// 订阅信息
 const expirationData = {
   "quantity": "1",
   "purchase_date_ms": "1686002766000",  // 当前时间
@@ -50,6 +48,7 @@ if (typeof $response === "undefined") {
 
     if (matchedApp) {
       expirationData.product_id = matchedApp.product_id;
+      // Inject expiration data into the receipt
       body.receipt.in_app = [expirationData];
       body.latest_receipt_info = [expirationData];
       obj.body = JSON.stringify(body);
