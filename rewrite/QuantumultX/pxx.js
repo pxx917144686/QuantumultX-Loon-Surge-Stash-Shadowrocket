@@ -36,21 +36,37 @@ let obj = {};
 
 // 请求
 if (typeof $response === "undefined") {
+  // If the request is a header request, delete specific headers
   delete $request.headers["x-revenuecat-etag"];
   delete $request.headers["X-RevenueCat-ETag"];
   obj.headers = $request.headers;
 } else {
   let body = JSON.parse($response.body || "{}");
 
-  if (body.receipt) {
-    const userAgent = $request.headers['User-Agent'];
+  if (body.subscriber) {
+    const userAgent = $request.headers['User-Agent'] || '';
+    // Find the matched app using User-Agent or Bundle ID
     const matchedApp = appList.find(app => userAgent.includes(app.app_name) || userAgent.includes(app.bundle_id));
 
     if (matchedApp) {
+      // Set the correct product_id for the matched app
       expirationData.product_id = matchedApp.product_id;
-      // Inject expiration data into the receipt
-      body.receipt.in_app = [expirationData];
-      body.latest_receipt_info = [expirationData];
+      
+      // Ensure subscriber data structure exists
+      let subscriber = body.subscriber;
+      subscriber.subscriptions = subscriber.subscriptions || {};
+      subscriber.entitlements = subscriber.entitlements || {};
+
+      // Inject subscription data for the matched app
+      subscriber.subscriptions[expirationData.product_id] = expirationData;
+
+      // Loop over entitlement keys and inject them with expiration data
+      for (let entitlement of ['premium', 'Full_access_app']) {
+        subscriber.entitlements[entitlement] = expirationData;
+        subscriber.entitlements[entitlement].product_identifier = expirationData.product_id;
+      }
+
+      // Return modified body as a response
       obj.body = JSON.stringify(body);
     }
   }
