@@ -7,8 +7,8 @@
 #!date = 2024-11-10
 
 [Argument]
-CaptureAccountToken = switch, false, true, tag = 获取账号key, desc = 控制是否捕获账户key
-CaptureAppID = switch, false, true, tag = 获取应用ID, desc = 是否捕获应用ID
+CaptureAccountToken = switch, true, true, tag = 获取账号key, desc = 控制是否捕获账户key
+CaptureAppID = switch, true, true, tag = 获取应用ID, desc = 是否捕获应用ID
 TimingParameters = input, "*/1 * * * * *", tag = 定时参数, desc = CRON格式的参数
 
 [General]
@@ -18,9 +18,10 @@ skip-proxy = %APPEND% iosapps.itunes.apple.com
 DOMAIN, testflight.apple.com, PROXY
 
 [Script]
-CaptureAccountToken = type=http-request, pattern=^https?:\/\/testflight\.apple\.com\/v3\/accounts\/.*\/apps$, requires-body=1, script-path=https://kelee.one/Resource/Script/TestFlight/TF_keys.js, argument=enable={{{CaptureAccountToken}}}, tag=获取账号key
+# Token definitions directly in the script arguments
+CaptureAccountToken = type=http-request, pattern=^https?:\/\/testflight\.apple\.com\/v3\/accounts\/.*\/apps$, requires-body=1, script-path=https://kelee.one/Resource/Script/TestFlight/TF_keys.js, argument="enable={{{CaptureAccountToken}}}&Token1=xHCJ0qBT&Token2=VCIvwk2g&Token3=fzDLkIVK&Token4=ABWQfJsU", tag=获取账号key
 
-CaptureAppID = type=http-request, pattern=^https:\/\/testflight\.apple\.com\/join\/(.*), requires-body=1, script-path=https://kelee.one/Resource/Script/TestFlight/TF_keys.js, argument=enable={{{CaptureAppID}}}, tag=应用ID获取
+CaptureAppID = type=http-request, pattern=^https:\/\/testflight\.apple\.com\/join\/(.*), requires-body=1, script-path=https://kelee.one/Resource/Script/TestFlight/TF_keys.js, argument="enable={{{CaptureAppID}}}&Token1=xHCJ0qBT&Token2=VCIvwk2g&Token3=fzDLkIVK&Token4=ABWQfJsU", tag=应用ID获取
 
 AutoJoinTF = type=cron, cron-exp={{{TimingParameters}}}, script-path=https://kelee.one/Resource/Script/TestFlight/Auto_join_TF.js, timeout=180, tag=自动加入
 
