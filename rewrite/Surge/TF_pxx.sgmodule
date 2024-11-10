@@ -1,5 +1,5 @@
 #!name = TestFlight TF pxx
-#!version = 1.2
+#!version = 1.3
 #!desc = 自动监控TestFlight空位，立即加入新空位。
 #!openUrl = https://apps.apple.com/app/id899247664
 #!tag = TestFlight监控
@@ -10,12 +10,17 @@
 CaptureAccountToken = switch, true, true, tag = 获取账号key, desc = 控制是否捕获账户key
 CaptureAppID = switch, true, true, tag = 获取应用ID, desc = 是否捕获应用ID
 TimingParameters = input, "*/1 * * * * *", tag = 定时参数, desc = CRON格式的参数
+Token1 = xHCJ0qBT
+Token2 = VCIvwk2g
+Token3 = fzDLkIVK
+Token4 = ABWQfJsU
+Token5 = X1m8N299
 
 [General]
 skip-proxy = %APPEND% iosapps.itunes.apple.com
 
 [Rule]
-DOMAIN-SUFFIX, testflight.apple.com, PROXY
+DOMAIN-SUFFIX, testflight.apple.com, GlobalProxy
 
 [Script]
 CaptureAccountToken = type=http-request, pattern=^https?:\/\/testflight\.apple\.com\/v3\/accounts\/.*\/apps$, requires-body=1, script-path=https://kelee.one/Resource/Script/TestFlight/TF_keys.js, argument="enable={{{CaptureAccountToken}}}&Token1=xHCJ0qBT&Token2=VCIvwk2g&Token3=fzDLkIVK&Token4=ABWQfJsU", tag=获取账号key
