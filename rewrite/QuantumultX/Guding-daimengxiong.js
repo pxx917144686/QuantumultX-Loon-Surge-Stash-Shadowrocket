@@ -4,17 +4,15 @@
 */
 
 [rewrite_local]
-
-https://appss.rhinox.cn url script-response-body https://raw.githubusercontent.com/pxx917144686/ios/master/rewrite/QuantumultX/Guding-daimengxiong.js
-
+^https:\/\/appss\.rhinox\.cn\/ url script-response-body https://raw.githubusercontent.com/pxx917144686/ios/master/rewrite/QuantumultX/Guding-daimengxiong.js
 [mitm] 
 hostname = appss.rhinox.cn
 *******************************/
+var boqii = $response.body || ''; // 骨钉、容器
+if (!boqii) $done({}); 
 
-var boqii = $response.body; // 获取响应体
-var obj = JSON.parse(boqii); // 解析为 JSON 对象
+var obj = JSON.parse(boqii); 
 
-// 检查请求路径是否包含目标接口
 if ($request.url.indexOf("/app/account/getAccountInfo") != -1) {
     obj.result.type = "VIP";
     obj.result.freeFlag = "YES";
@@ -29,5 +27,5 @@ if ($request.url.indexOf("/app/account/getAccountInfo") != -1) {
     ];
 }
 
-boqii = JSON.stringify(obj); // 将对象转换回字符串
-$done(boqii); // 返回修改后的响应体
+boqii = JSON.stringify(obj); 
+$done(boqii); 
