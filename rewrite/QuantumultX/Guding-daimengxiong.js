@@ -9,23 +9,33 @@
 hostname = appss.rhinox.cn
 *******************************/
 var boqii = $response.body || ''; // 骨钉、容器
-if (!boqii) $done({}); 
-
-var obj = JSON.parse(boqii); 
-
-if ($request.url.indexOf("/app/account/getAccountInfo") != -1) {
-    obj.result.type = "VIP";
-    obj.result.freeFlag = "YES";
-    obj.result.vipExpireDays = 99999999999;
-    obj.result.vipExpireTime = "2999-01-01 00:00:00";
-    obj.result.vipGroupInfos = [
-       {
-        "groupType": "TYPE_ONE",
-        "vipType": "VIP",
-        "autoPay": "YES"
-      }
-    ];
+if (!boqii) {
+    console.log("Response body is empty."); 
+    $done({});
 }
 
-boqii = JSON.stringify(obj); 
-$done(boqii); 
+try {
+    var obj = JSON.parse(boqii); 
+    console.log("Original Response: ", JSON.stringify(obj));
+    
+    if ($request.url.indexOf("/app/account/getAccountInfo") != -1) {
+        obj.result.type = "VIP";
+        obj.result.freeFlag = "YES";
+        obj.result.vipExpireDays = 99999999999;
+        obj.result.vipExpireTime = "2999-01-01 00:00:00";
+        obj.result.vipGroupInfos = [
+            {
+                "groupType": "TYPE_ONE",
+                "vipType": "VIP",
+                "autoPay": "YES"
+            }
+        ];
+    }
+
+    boqii = JSON.stringify(obj);
+    console.log("Modified Response: ", boqii);
+    $done(boqii);
+} catch (error) {
+    console.log("Error processing script: ", error.message);
+    $done({});
+}
