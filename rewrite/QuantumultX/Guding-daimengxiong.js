@@ -7,28 +7,27 @@
 
 https://appss.rhinox.cn url script-response-body https://raw.githubusercontent.com/pxx917144686/ios/master/rewrite/QuantumultX/Guding-daimengxiong.js
 
-[mitm]
+[mitm] 
 hostname = appss.rhinox.cn
-*/
+*******************************/
 
-var boqii = $response.body;
-if (!boqii) $done({}); // 防止 $response.body 为空时报错
+var boqii = $response.body; // 获取响应体
+var obj = JSON.parse(boqii); // 解析为 JSON 对象
 
-var obj = JSON.parse(boqii);
-
+// 检查请求路径是否包含目标接口
 if ($request.url.indexOf("/app/account/getAccountInfo") != -1) {
     obj.result.type = "VIP";
     obj.result.freeFlag = "YES";
-    obj.result.vipExpireDays = 666;
+    obj.result.vipExpireDays = 99999999999;
     obj.result.vipExpireTime = "2999-01-01 00:00:00";
     obj.result.vipGroupInfos = [
-        {
-            "groupType": "TYPE_ONE",
-            "vipType": "VIP",
-            "autoPay": "YES"
-        }
+       {
+        "groupType": "TYPE_ONE",
+        "vipType": "VIP",
+        "autoPay": "YES"
+      }
     ];
 }
 
-boqii = JSON.stringify(obj);
-$done({ body: boqii });
+boqii = JSON.stringify(obj); // 将对象转换回字符串
+$done(boqii); // 返回修改后的响应体
