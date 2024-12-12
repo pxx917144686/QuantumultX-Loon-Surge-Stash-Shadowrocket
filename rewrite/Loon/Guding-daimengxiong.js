@@ -1,5 +1,5 @@
-#!name = 呆萌熊AP 容器 @boqii
-#!desc = 不清楚~
+#!name = 呆萌熊 会员 骨钉=容器 @boqii
+#!desc = 番茄钟-学霸必备
 #!openUrl = https://apps.apple.com/app/id1360827510
 #!author = boqii[https://t.me/Guding88]
 #!tag = VIP
