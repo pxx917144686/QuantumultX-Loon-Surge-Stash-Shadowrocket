@@ -21,7 +21,7 @@ if (url.includes('/api/v1/user/profile/me/')) {
         "merchant": "apple",
         "platform_product_id": "com.tradingview.pro.premium.yearly",
         "next_billing_cycle": "y",
-        "pro_plan_expire_on": 9705594522,
+        "pro_plan_expire_on": 2524675200,
         "is_lite_plan": true,
         "is_trial_available": false,
         "next_pro_plan": "pro_premium",
@@ -42,7 +42,7 @@ if (url.includes('/api/v1/user/profile/me/')) {
     obj.billing_cycle = "y";
     obj.merchant = "apple";
     obj.next_billing_cycle = "y";
-    obj.pro_plan_expire_on = 9705594522;
+    obj.pro_plan_expire_on = 2524675200;
     obj.is_trial_available = false;
     obj.next_pro_plan = "pro_premium";
     obj.pro_plan = "pro_premium";
