@@ -1,7 +1,7 @@
 /*************************************
 [rewrite_local]
-^https:\/\/firebaselogging-pa\.googleapis\.com\/.+\/(receipts$|subscribers\/?(.*?)*$) url script-response-body https://raw.githubusercontent.com/pxx917144686/QuantumultX-Loon-Surge-Stash-Shadowrocket/refs/heads/master/rewrite/QuantumultX/xx.js
-^https:\/\/firebaselogging-pa\.googleapis\/.+\/(receipts$|subscribers\/?(.*?)*$) url script-request-header https://raw.githubusercontent.com/pxx917144686/QuantumultX-Loon-Surge-Stash-Shadowrocket/refs/heads/master/rewrite/QuantumultX/xx.js
+^https:\/\/firebaselogging-pa\.googleapis\.com\/.+\/(receipts$|subscribers\/?$) url script-response-body https://raw.githubusercontent.com/pxx917144686/QuantumultX-Loon-Surge-Stash-Shadowrocket/refs/heads/master/rewrite/QuantumultX/xx.js
+^https:\/\/firebaselogging-pa\.googleapis\.com\/.+\/(receipts$|subscribers\/?$) url script-request-header https://raw.githubusercontent.com/pxx917144686/QuantumultX-Loon-Surge-Stash-Shadowrocket/refs/heads/master/rewrite/QuantumultX/xx.js
 
 [mitm]
 hostname = firebaselogging-pa.googleapis.com
