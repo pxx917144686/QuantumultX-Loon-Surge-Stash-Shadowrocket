@@ -175,8 +175,14 @@ if (typeof $response == "undefined") {
     'nasctl':{ name: 'pro', id: 'nasctl_pro'},
     'Sleepo':{ name: 'pro', id: 'sleepo_premium_lifetime_free'},
     'Super%20AI%20Chat':{ name: 'premium', id: 'chatbot_v4_1999_1y'},
-    'PicSeedClient':{ name: 'pro', id: 'com.picseed.sub.pro.event.annual'},
-    'ChatOn%20AI':{ name: 'premium', id: 'chat.sub.gr1.1y40'},
+    //'PicSeedClient':{ name: 'Pro', id: 'com.picseed.sub.pro.event.annual'},//PicSeed
+    'Free':{ name: 'pro', id: 'appspree_pro_lifetime'},//Appspree
+    'PastePal':{ name: 'pro', id: 'com.onmyway133.PastePal.pro'},//PastePal
+    'XGBA':{ name: 'xGBA.pro', id: 'xGBA.lifetime.20240502'},
+    'memesoundboard':{ name: 'pro', id: 'lifetime_3499'},//Meme Soundboard, Effects: Deez
+    'gloriousYouth':{ name: 'gloriousYouth', id: 'gloriousYouth'},
+    '%E8%B0%9C%E5%BA%95%E6%97%B6%E9%92%9F':{ name: 'Entitlement.Pro', id: 'tech.miidii.MDClock.pro'},
+    'AdGuard%20Home%20Remote':{ name: 'aghrpro', id: 'adguard.home.remote.pro'},
     'ProKnockOut': { name: 'premium', id: 'com.knockout.SVIP.50off' } // ProKnockOut
 
 
