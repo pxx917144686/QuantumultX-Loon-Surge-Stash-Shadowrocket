@@ -7,8 +7,8 @@
 [mitm]
 hostname = api.revenuecat.com, api.rc-backup.com
 *************************************/
-
-let pxx917144686 = {}, pxx = JSON.parse($response.body || "{}");
+const pxx917144686 = {};
+const pxx = JSON.parse($response.body || "{}");
 
 const headers = $request.headers;
 const ua = headers['User-Agent'] || headers['user-agent'];
@@ -17,6 +17,7 @@ const bundle_id = headers['X-Client-Bundle-ID'] || headers['x-client-bundle-id']
 // 应用信息映射
 const list = {
   '%E8%B0%9C%E5%BA%95%E6%97%B6%E9%92%9F': { name: 'Entitlement.Pro', id: 'tech.miidii.MDClock.pro', cm: 'sjb' },  //目标地图
+  // 在此处可以添加更多的映射关系
 };
 
 // 内购数据
@@ -28,7 +29,6 @@ const data = {
   "store": "app_store", 
   "product_identifier": "com.example.app.product1" 
 };
-
 
 // 匹配并设置订阅信息
 for (const key in list) {
