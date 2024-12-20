@@ -12,7 +12,7 @@ let chxm1024 = {}, chxm1023 = JSON.parse(typeof $response != "undefined" && $res
 const headers = $request.headers, ua = headers['User-Agent'] || headers['user-agent'], bundle_id = headers['X-Client-Bundle-ID'] || headers['x-client-bundle-id'];
 
 const bundle = {
-  'design.yugen.Flow': { name: 'pro', id: 'design.yugen.Flow.Lifetime', cm: 'sja' },  //Flow-番茄工作
+  'com.apporigins.Sleepo': { name: 'pro', id: 'sleepo_premium_lifetime_free', cm: 'sja' },  //Sleepo
 };  
   
 const listua = {
