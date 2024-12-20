@@ -13,6 +13,7 @@ const headers = $request.headers, ua = headers['User-Agent'] || headers['user-ag
 
 const bundle = {
   'com.apporigins.Sleepo': { name: 'pro', id: 'sleepo_premium_lifetime_free', cm: 'sja' },  //Sleepo
+  'net.smayer.bodydata': { name: 'pro', id: 'RemoveAds', cm: 'sja' },  //BMI Calculator
 };  
   
 const listua = {
