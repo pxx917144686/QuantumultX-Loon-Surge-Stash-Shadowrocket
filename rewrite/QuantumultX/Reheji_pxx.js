@@ -15,7 +15,7 @@ if (typeof $response == "undefined") {
   obj.headers = $request.headers;
 } else {
   let body = JSON.parse($response.body || "{}");
-  
+
   if (body && body.subscriber) {
     let date = {
       "expires_date": "2999-01-01T00:00:00Z",
@@ -28,16 +28,15 @@ if (typeof $response == "undefined") {
     let subscriber = body.subscriber;
     let bundle_id = $request.headers["X-Client-Bundle-ID"] || $request.headers["User-Agent"].match(/^[%a-zA-Z0-9]+/)[0];
 
-    // APP
-    const list = {
-      '%E8%B0%9C%E5%BA%95%E6%97%B6%E9%92%9F': { name: 'Entitlement.Pro', id: 'tech.miidii.MDClock.pro', cm: 'sjb' },
-
+    // APP 映射表
+    const listua = {
+      '%E8%B0%9C%E5%BA%95%E6%97%B6%E9%92%9F': { name: 'Entitlement.Pro', id: 'tech.miidii.MDClock.pro', cm: 'sjb' }, //目标地图
     };
 
     // 订阅信息
-    for (const key in list) {
+    for (const key in listua) {
       if (new RegExp(`^${key}`, 'i').test(bundle_id)) {
-        const { name, id } = list[key];
+        const { name, id } = listua[key];
         
         // 设置订阅信息
         subscriber.subscriptions = subscriber.subscriptions || {};
