@@ -10,9 +10,15 @@ hostname = api.revenuecat.com, api.rc-backup.com
 *************************************/
 let chxm1024 = {}, chxm1023 = JSON.parse(typeof $response != "undefined" && $response.body || "{}");
 const headers = $request.headers, ua = headers['User-Agent'] || headers['user-agent'], bundle_id = headers['X-Client-Bundle-ID'] || headers['x-client-bundle-id'];
+
+const bundle = {
+  'design.yugen.Flow': { name: 'pro', id: 'design.yugen.Flow.Lifetime', cm: 'sja' },  //Flow-番茄工作
+};  
+  
 const listua = {
   '%E8%B0%9C%E5%BA%95%E6%97%B6%E9%92%9F': { name: 'Entitlement.Pro', id: 'tech.miidii.MDClock.pro', cm: 'sjb' },  //目标地图
 };
+
 if (typeof $rocket !== 'undefined') {
     function getBoxJSValue(_0x10072f) {
         var _0x372641 = {
