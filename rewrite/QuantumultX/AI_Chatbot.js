@@ -24,44 +24,44 @@ for (var key in $request.headers) {
 
 // 获取 User-Agent
 var UA = $request.headers['user-agent'];
+console.log('User-Agent:', UA); // 输出 UA 以进行调试
 
 // 定义 User-Agent 到产品 ID 的映射
 var uaProductMapping = {
   'MoodTracker': { product_id: 'co.vulcanlabs.moodtracker.lifetime2' },
   'PicPro': { product_id: 'com.quangtm193.picpro1year' }
-
 };
 
 // 模拟的收据数据
 var receipt = {
   "quantity": "1",
-  "purchase_date_ms": "1686002766000",  // 示例购买时间戳
-  "expires_date": "2099-01-01 00:00:00 Etc/GMT",  // 永久有效期
-  "expires_date_pst": "2099-01-01 00:00:00 America/Los_Angeles",  // 过期时间（PST）
-  "is_in_intro_offer_period": "false",  // 不在试用期
-  "transaction_id": "123456789012345",  // 示例交易 ID
-  "is_trial_period": "false",  // 不是试用期
-  "original_transaction_id": "123456789012345",  // 示例原始交易 ID
-  "purchase_date": "2023-06-06 06:06:06 Etc/GMT",  // 购买时间
-  "product_id": "co.vulcanlabs.moodtracker.lifetime2",  // 产品 ID
-  "original_purchase_date_pst": "2023-06-06 06:06:06 America/Los_Angeles",  // 原始购买时间
-  "in_app_ownership_type": "PURCHASED",  // 购买状态
-  "subscription_group_identifier": "20877951",  // 订阅组 ID
-  "original_purchase_date_ms": "1686002766000",  // 原始购买时间戳
-  "web_order_line_item_id": "123456789012345",  // 示例 Web 订单 ID
-  "expires_date_ms": "4080082256000",  // 永久有效期的时间戳
-  "purchase_date_pst": "2023-06-06 06:06:06 America/Los_Angeles",  // 购买时间
-  "original_purchase_date": "2023-06-06 06:06:06 Etc/GMT"  // 原始购买时间
+  "purchase_date_ms": "1686002766000",  
+  "expires_date": "2099-01-01 00:00:00 Etc/GMT",  
+  "expires_date_pst": "2099-01-01 00:00:00 America/Los_Angeles",  
+  "is_in_intro_offer_period": "false",  
+  "transaction_id": "123456789012345",  
+  "is_trial_period": "false",  
+  "original_transaction_id": "123456789012345",  
+  "purchase_date": "2023-06-06 06:06:06 Etc/GMT",  
+  "product_id": "co.vulcanlabs.moodtracker.lifetime2",  
+  "original_purchase_date_pst": "2023-06-06 06:06:06 America/Los_Angeles",  
+  "in_app_ownership_type": "PURCHASED",  
+  "subscription_group_identifier": "20877951",  
+  "original_purchase_date_ms": "1686002766000",  
+  "web_order_line_item_id": "123456789012345",  
+  "expires_date_ms": "4080082256000",  
+  "purchase_date_pst": "2023-06-06 06:06:06 America/Los_Angeles",  
+  "original_purchase_date": "2023-06-06 06:06:06 Etc/GMT" 
 };
 
 // 定义自动续期相关数据
 var renewal = {
   "expiration_intent": "1",
-  "product_id": "co.vulcanlabs.moodtracker.lifetime2",  // 产品 ID
-  "is_in_billing_retry_period": "0",  // 不在账单重试期
-  "auto_renew_product_id": "co.vulcanlabs.moodtracker.lifetime2",  // 自动续订产品 ID
-  "original_transaction_id": "123456789012345",  // 示例原始交易 ID
-  "auto_renew_status": "0"  // 自动续订关闭
+  "product_id": "co.vulcanlabs.moodtracker.lifetime2",  
+  "is_in_billing_retry_period": "0",  
+  "auto_renew_product_id": "co.vulcanlabs.moodtracker.lifetime2",  
+  "original_transaction_id": "123456789012345",  
+  "auto_renew_status": "0"  
 };
 
 // 根据 User-Agent 查找对应的产品ID，并返回模拟的收据信息
@@ -75,10 +75,14 @@ for (var uaKey in uaProductMapping) {
     pxx.receipt.in_app = [receipt];
     pxx.latest_receipt_info = [receipt];
     pxx.pending_renewal_info = [renewal];
+    pxx.latest_receipt = "chxm1023"; // 根据需要修改
+    console.log('Matched User-Agent, modified receipt data');
     break;
   }
 }
 
 // 返回修改后的响应
 pxx917144686 = pxx;
+console.log('Final response body:', JSON.stringify(pxx917144686)); // 输出最终响应体以调试
 $done({ body: JSON.stringify(pxx917144686) });
+
