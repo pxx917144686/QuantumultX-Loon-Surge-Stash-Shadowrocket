@@ -8,7 +8,7 @@
 hostname = api.revenuecat.com, api.rc-backup.com
 
 *************************************/
-let chxm1024 = {}, chxm1023 = JSON.parse(typeof $response != "undefined" && $response.body || "{}");
+let pxx917144686 = {}, pxx = JSON.parse(typeof $response != "undefined" && $response.body || "{}");
 const headers = $request.headers, ua = headers['User-Agent'] || headers['user-agent'], bundle_id = headers['X-Client-Bundle-ID'] || headers['x-client-bundle-id'];
 
 const bundle = {
