@@ -7,7 +7,6 @@ https:\/\/buy\.itunes\.apple\.com\/verifyReceipt url script-response-body https:
 hostname = buy.itunes.apple.com
 
 */
-*/
 var guding = {};
 var guding6 = JSON.parse(typeof $response != "undefined" && $response.body || null);
 var headers = {};
