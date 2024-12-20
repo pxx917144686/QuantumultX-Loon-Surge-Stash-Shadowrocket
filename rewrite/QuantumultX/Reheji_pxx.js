@@ -5,41 +5,54 @@
 ^https:\/\/api\.(revenuecat|rc-backup)\.com\/.+\/(receipts$|subscribers\/?(.*?)*$) url script-response-body https://raw.githubusercontent.com/pxx917144686/QuantumultX-Loon-Surge-Stash-Shadowrocket/refs/heads/master/rewrite/QuantumultX/Reheji_pxx.js
 ^https:\/\/api\.(revenuecat|rc-backup)\.com\/.+\/(receipts$|subscribers\/?(.*?)*$) url script-request-header https://raw.githubusercontent.com/pxx917144686/QuantumultX-Loon-Surge-Stash-Shadowrocket/refs/heads/master/rewrite/QuantumultX/Reheji_pxx.js
 [mitm]
-hostname = api.revenuecat.com, api.rc-backup.com
+hostname = api.rc-backup.com
 *************************************/
-const pxx917144686 = {};
-const pxx = JSON.parse($response.body || "{}");
+const obj = {};
 
-const headers = $request.headers;
-const ua = headers['User-Agent'] || headers['user-agent'];
-const bundle_id = headers['X-Client-Bundle-ID'] || headers['x-client-bundle-id'];
+if (typeof $response == "undefined") {
+  delete $request.headers["x-revenuecat-etag"];
+  delete $request.headers["X-RevenueCat-ETag"];
+  obj.headers = $request.headers;
+} else {
+  let body = JSON.parse($response.body || "{}");
+  
+  if (body && body.subscriber) {
+    let date = {
+      "expires_date": "2999-01-01T00:00:00Z",
+      "original_purchase_date": "2021-01-01T00:00:00Z",
+      "purchase_date": "2021-01-01T00:00:00Z",
+      "ownership_type": "PURCHASED",
+      "store": "app_store"
+    };
 
-// 应用信息映射
-const list = {
-  '%E8%B0%9C%E5%BA%95%E6%97%B6%E9%92%9F': { name: 'Entitlement.Pro', id: 'tech.miidii.MDClock.pro', cm: 'sjb' },  //目标地图
-  // 在此处可以添加更多的映射关系
-};
+    let subscriber = body.subscriber;
+    let bundle_id = $request.headers["X-Client-Bundle-ID"] || $request.headers["User-Agent"].match(/^[%a-zA-Z0-9]+/)[0];
 
-// 内购数据
-const data = {
-  "expires_date": "2099-09-09T09:09:09Z",  
-  "original_purchase_date": "2023-06-06T06:06:06Z", 
-  "purchase_date": "2023-06-06T06:06:06Z", 
-  "ownership_type": "PURCHASED", 
-  "store": "app_store", 
-  "product_identifier": "com.example.app.product1" 
-};
+    // APP
+    const list = {
+      '%E8%B0%9C%E5%BA%95%E6%97%B6%E9%92%9F': { name: 'Entitlement.Pro', id: 'tech.miidii.MDClock.pro', cm: 'sjb' },
 
-// 匹配并设置订阅信息
-for (const key in list) {
-  if (new RegExp(`^${key}`, 'i').test(bundle_id)) {
-    const { name, id } = list[key];
-    pxx.subscriber = pxx.subscriber || { subscriptions: {}, entitlements: {} };
-    pxx.subscriber.subscriptions[id] = data;
-    pxx.subscriber.entitlements[name] = { ...data, product_identifier: id };
-    break;
+    };
+
+    // 订阅信息
+    for (const key in list) {
+      if (new RegExp(`^${key}`, 'i').test(bundle_id)) {
+        const { name, id } = list[key];
+        
+        // 设置订阅信息
+        subscriber.subscriptions = subscriber.subscriptions || {};
+        subscriber.entitlements = subscriber.entitlements || {};
+
+        subscriber.subscriptions[id] = date;
+        subscriber.entitlements[name] = { ...date, product_identifier: id };
+        
+        break; // 找到匹配的应用后跳出循环
+      }
+    }
+
+    // 返回修改后的body
+    obj.body = JSON.stringify(body);
   }
 }
 
-// 更新响应内容
-$done({ body: JSON.stringify(pxx) });
+$done(obj);
