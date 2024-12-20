@@ -177,7 +177,7 @@ if (typeof $response == "undefined") {
     'Super%20AI%20Chat':{ name: 'premium', id: 'chatbot_v4_1999_1y'},
     'PicSeedClient':{ name: 'pro', id: 'com.picseed.sub.pro.event.annual'},
     'ChatOn%20AI':{ name: 'premium', id: 'chat.sub.gr1.1y40'},
-
+    'ProKnockOut':{ name: 'premium', id: 'com.knockout.SVIP.50off'},
 
 
 
