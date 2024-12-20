@@ -28,7 +28,7 @@ var UA = $request.headers['user-agent'];
 // 定义 User-Agent 到产品 ID 的映射
 var uaProductMapping = {
   'MoodTracker': { product_id: 'co.vulcanlabs.moodtracker.lifetime2' },
-  'Picsew': {product_id: 'com.sugarmo.ScrollClip.pro',bundle_id: 'com.sugarmo.ScrollClip'},
+  'PicPro': {product_id: 'com.quangtm193.picpro1year',bundle_id: 'com.quangtm193.picpro'},
   // 添加APP ID
 };
 
