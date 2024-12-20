@@ -1,4 +1,5 @@
 /*
+# @ pxx917144686
 AI_Chatbot Apple商店：https://apps.apple.com/us/app/ai-chatbot-ai-chat-smith-4/id1559479889
 [rewrite_local]
 ^https?:\/\/buy\.itunes\.apple\.com\/verifyReceipt$ url script-response-body https://raw.githubusercontent.com/pxx917144686/ios/master/rewrite/QuantumultX/AI_Chatbot.js
@@ -26,7 +27,8 @@ var UA = $request.headers['user-agent'];
 
 // 定义 User-Agent 到产品 ID 的映射
 var uaProductMapping = {
-  'MoodTracker': { product_id: 'co.vulcanlabs.moodtracker.lifetime2' }
+  'MoodTracker': { product_id: 'co.vulcanlabs.moodtracker.lifetime2' },
+  'Picsew': {product_id: 'com.sugarmo.ScrollClip.pro',bundle_id: 'com.sugarmo.ScrollClip'},
   // 添加APP ID
 };
 
@@ -42,13 +44,13 @@ var receipt = {
   "original_transaction_id": "123456789012345",  // 示例原始交易 ID
   "purchase_date": "2023-06-06 06:06:06 Etc/GMT",  // 购买时间
   "product_id": "co.vulcanlabs.moodtracker.lifetime2",  // 产品 ID
-  "original_purchase_date_pst": "2023-06-06 06:06:06 America/Los_Angeles",  // 原始购买时间（PST）
+  "original_purchase_date_pst": "2023-06-06 06:06:06 America/Los_Angeles",  // 原始购买时间
   "in_app_ownership_type": "PURCHASED",  // 购买状态
   "subscription_group_identifier": "20877951",  // 订阅组 ID
   "original_purchase_date_ms": "1686002766000",  // 原始购买时间戳
   "web_order_line_item_id": "123456789012345",  // 示例 Web 订单 ID
   "expires_date_ms": "4080082256000",  // 永久有效期的时间戳
-  "purchase_date_pst": "2023-06-06 06:06:06 America/Los_Angeles",  // 购买时间（PST）
+  "purchase_date_pst": "2023-06-06 06:06:06 America/Los_Angeles",  // 购买时间
   "original_purchase_date": "2023-06-06 06:06:06 Etc/GMT"  // 原始购买时间
 };
 
@@ -62,7 +64,7 @@ var renewal = {
   "auto_renew_status": "0"  // 自动续订关闭
 };
 
-// 根据 User-Agent 查找对应的产品 ID，并返回模拟的收据信息
+// 根据 User-Agent 查找对应的产品ID，并返回模拟的收据信息
 for (var uaKey in uaProductMapping) {
   if (UA && UA.includes(uaKey)) {
     var productInfo = uaProductMapping[uaKey];
