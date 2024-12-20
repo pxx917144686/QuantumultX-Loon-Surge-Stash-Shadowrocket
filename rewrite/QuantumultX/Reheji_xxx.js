@@ -14,6 +14,7 @@ const headers = $request.headers, ua = headers['User-Agent'] || headers['user-ag
 const bundle = {
   'com.apporigins.Sleepo': { name: 'pro', id: 'sleepo_premium_lifetime_free', cm: 'sja' },  //Sleepo
   'in.capcap.app': { name: 'pro', id: 'in.capcap.subscription.pro.weekly.non.trial', cm: 'sja' },  //字幕生成器
+  'me.fandong.ScreenRecordCase': { name: 'Premium', id: 'me.fandong.ScreenRecordCase.Ultra', cm: 'sja' },  //ScreenCase
   'net.smayer.bodydata': { name: 'pro', id: 'RemoveAds', cm: 'sja' }  //体重指数计算器
 };  
   
