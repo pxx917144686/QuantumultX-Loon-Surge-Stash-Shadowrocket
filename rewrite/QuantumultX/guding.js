@@ -7,21 +7,18 @@ https:\/\/buy\.itunes\.apple\.com\/verifyReceipt url script-response-body https:
 hostname = buy.itunes.apple.com
 
 */
-var guding = {};
-var guding6 = JSON.parse(typeof $response != "undefined" && $response.body || null);
-var headers = {};
-for (var key in $request.headers) {
-  const reg = /^[a-z]+$/;
-  if (key === "User-Agent" && !reg.test(key)) {
-    var lowerkey = key.toLowerCase();
-    $request.headers[lowerkey] = $request.headers[key];
-    delete $request.headers[key];
-  }
-}
-var UA = $request.headers['user-agent'];
+var obj = JSON.parse($response.body);
+let requestUrl = $request.url;
+let notifyState = false;
+let name = "ProKnockOut";
+let productName = "com.loveyouchenapps.knockout";
+let productType = "com.knockout.SVIP.50off";
+let appVersion = "5";
+
+// 用户代理映射
 var uaProductMapping = {
   'ScreenRecord': {product_id: 'https://t.me/Guding88'},
-  'bazaart': {product_id: 'Bazaart_Premium_Monthly_v9',},
+  'bazaart': {product_id: 'Bazaart_Premium_Monthly_v9'},
   '%E6%8B%8D%E7%89%B9%E5%86%85%E5%A4%B4': {product_id: 'Patternator_Lock_Screen_Monthly'},
   'Revive': {product_id: 'revive.inapp.pro.lt_wotrial_42.99'},
   'Picsew': {product_id: 'com.sugarmo.ScrollClip.pro',bundle_id: 'com.sugarmo.ScrollClip'},
@@ -94,33 +91,27 @@ var uaProductMapping = {
   'com.brother.pdfreaderprofree': {product_id: 'com.pdfreaderpro.free.member.all_access_pack_permanent_license.001'},
   
 
-
-
-
-
-  
-
-};
 var receipt = {
   "quantity": "1",
   "purchase_date_ms": "1686002766000",
-  "expires_date": "6666-06-06 06:06:06 Etc\/GMT",
-  "expires_date_pst": "6666-06-06 06:06:06 America\/Los_Angeles",
+  "expires_date": "6666-06-06 06:06:06 Etc/GMT",
+  "expires_date_pst": "6666-06-06 06:06:06 America/Los_Angeles",
   "is_in_intro_offer_period": "false",
   "transaction_id": "666666666666666",
   "is_trial_period": "false",
   "original_transaction_id": "666666666666666",
-  "purchase_date": "2023-06-06 06:06:06 Etc\/GMT",
+  "purchase_date": "2023-06-06 06:06:06 Etc/GMT",
   "product_id": "https://t.me/Guding88",
-  "original_purchase_date_pst": "2023-06-06 06:06:06 America\/Los_Angeles",
+  "original_purchase_date_pst": "2023-06-06 06:06:06 America/Los_Angeles",
   "in_app_ownership_type": "PURCHASED",
   "subscription_group_identifier": "20877951",
   "original_purchase_date_ms": "1686002766000",
   "web_order_line_item_id": "666666666666666",
   "expires_date_ms": "148204937166000",
-  "purchase_date_pst": "2023-06-06 06:06:06 America\/Los_Angeles",
-  "original_purchase_date": "2023-06-06 06:06:06 Etc\/GMT"
-}
+  "purchase_date_pst": "2023-06-06 06:06:06 America/Los_Angeles",
+  "original_purchase_date": "2023-06-06 06:06:06 Etc/GMT"
+};
+
 var renewal = {
   "expiration_intent": "1",
   "product_id": "https://t.me/Guding88",
@@ -128,7 +119,9 @@ var renewal = {
   "auto_renew_product_id": "https://t.me/Guding88",
   "original_transaction_id": "666666666666666",
   "auto_renew_status": "0"
-}
+};
+
+// 匹配 User-Agent 并修改产品信息
 for (var uaKey in uaProductMapping) {
   if (UA && UA.includes(uaKey)) {
     var productInfo = uaProductMapping[uaKey];
@@ -136,11 +129,87 @@ for (var uaKey in uaProductMapping) {
     receipt.product_id = product_id;
     renewal.product_id = product_id;
     renewal.auto_renew_product_id = product_id;
-    guding6.receipt.in_app = [receipt];
-    guding6.latest_receipt_info = [receipt];
-    guding.pending_renewal_info = [renewal];
+    obj.receipt.in_app = [receipt];
+    obj.latest_receipt_info = [receipt];
+    obj.pending_renewal_info = [renewal];
     break;
   }
 }
-guding = guding6;
-$done({ body: JSON.stringify(guding) });
+
+// 如果请求 URL 匹配 ProKnockOut 相关内容，进行特定处理
+if (/^https:\/\/buy\.itunes\.apple\.com\/verifyReceipt?/.test(requestUrl) && $request.headers["User-Agent"].includes(name)) {
+    let proKnockOutReceipt = {
+        receipt_type: "Production",
+        bundle_id: productName,
+        in_app: [{
+            quantity: "1",
+            transaction_id: "666666666666667",
+            original_transaction_id: "666666666666667",
+            product_id: productType,
+            in_app_ownership_type: "PURCHASED",
+            purchase_date: "2023-08-14 15:27:40 Etc/GMT",
+            purchase_date_ms: "1691972860000",
+            purchase_date_pst: "2023-08-14 08:27:40 America/Los_Angeles",
+            original_purchase_date: "2023-08-14 08:24:40 Etc/GMT",
+            original_purchase_date_ms: "1692026680000",
+            original_purchase_date_pst: "2023-08-14 08:24:40 America/Los_Angeles",
+            expires_date: "2222-02-02 02:02:02 Etc/GMT",
+            expires_date_pst: "2222-02-02 02:02:02 America/Los_Angeles",
+            expires_date_ms: "7955085722000",
+        }],
+        adam_id: 1111111111,
+        receipt_creation_date_pst: "2023-08-14 08:25:04 America/Los_Angeles",
+        request_date: "2023-08-14 15:27:40 Etc/GMT",
+        request_date_pst: "2023-08-14 08:27:40 America/Los_Angeles",
+        version_external_identifier: 666666666,
+        request_date_ms: "1692026860531",
+        original_purchase_date_pst: "2023-08-14 08:24:40 America/Los_Angeles",
+        application_version: appVersion,
+        original_purchase_date_ms: "1692026680000",
+        receipt_creation_date_ms: "1691972704000",
+        original_application_version: appVersion,
+        download_id: 666666666666666666,
+        latest_receipt_info: [{
+            quantity: "1",
+            transaction_id: "666666666666667",
+            original_transaction_id: "666666666666667",
+            product_id: productType,
+            in_app_ownership_type: "PURCHASED",
+            is_in_intro_offer_period: "false",
+            is_trial_period: "false",
+            purchase_date: "2023-08-14 15:27:40 Etc/GMT",
+            purchase_date_ms: "1691972860000",
+            purchase_date_pst: "2023-08-14 08:27:40 America/Los_Angeles",
+            original_purchase_date: "2023-08-14 08:24:40 Etc/GMT",
+            original_purchase_date_ms: "1692026680000",
+            original_purchase_date_pst: "2023-08-14 08:24:40 America/Los_Angeles",
+            expires_date: "2222-02-02 02:02:02 Etc/GMT",
+            expires_date_pst: "2222-02-02 02:02:02 America/Los_Angeles",
+            expires_date_ms: "7955085722000",
+        }],
+        pending_renewal_info: [{
+            product_id: productName,
+            original_transaction_id: "666666666666667",
+            auto_renew_product_id: productType,
+            auto_renew_status: "1",
+        }],
+        status: 0,
+        environment: "Production",
+    };
+
+    obj.latest_receipt_info = proKnockOutReceipt.latest_receipt_info;
+    obj.latest_receipt = "";
+    obj.pending_renewal_info = proKnockOutReceipt.pending_renewal_info;
+    obj.receipt = proKnockOutReceipt;
+
+    if (notifyState) {
+        $notify("执行", "", "解锁成功", {
+            "open-url": "404",
+            "media-url": "404",
+        });
+    }
+}
+
+$done({
+    body: JSON.stringify(obj)
+});
