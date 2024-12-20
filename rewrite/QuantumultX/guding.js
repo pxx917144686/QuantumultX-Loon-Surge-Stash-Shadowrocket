@@ -177,13 +177,7 @@ if (typeof $response == "undefined") {
     'Super%20AI%20Chat':{ name: 'premium', id: 'chatbot_v4_1999_1y'},
     'PicSeedClient':{ name: 'pro', id: 'com.picseed.sub.pro.event.annual'},
     'ChatOn%20AI':{ name: 'premium', id: 'chat.sub.gr1.1y40'},
-    'ProKnockOut':{ name: 'premium', id: 'com.knockout.SVIP.50off'},
-
-
-
-
-
-
+    'ProKnockOut': { name: 'premium', id: 'com.knockout.SVIP.50off' } // ProKnockOut
 
 
     //以下内容来自卑鄙的Baby（@Yu9191）
@@ -193,11 +187,10 @@ if (typeof $response == "undefined") {
     
     //群友发的，不知道从谁那摘出来的
     'ScreenRecordCase':{ name: 'Premium', id: 'me.fandong.ScreenRecordCase.Ultra'},
-
-
-    
-    
+ 
   };
+
+// 模拟订阅数据
   const data = {
     "expires_date": "6666-06-06T06:06:06Z",
     "original_purchase_date": "2023-06-06T06:06:06Z",
@@ -205,6 +198,8 @@ if (typeof $response == "undefined") {
     "ownership_type": "PURCHASED",
     "store": "app_store"
   };
+
+  // 匹配当前应用并生成订阅信息
   for (const i in UAMappings) {
     if (new RegExp(`^${i}`, 'i').test(UA)) {
       const { name, id } = UAMappings[i];
