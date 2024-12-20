@@ -18,6 +18,7 @@ const lifetimeid = `${bundle_id}.lifetime`;
 
 const list = {
   'com.LuoWei.aDiary': { cm: 'timea', hx: 'hxpda', id: "com.LuoWei.aDiary.yearly0", latest: "pxx917144686" },  //aDiary
+  'co.vulcanlabs.moodtracker': { cm: 'timea', hx: 'hxpda', id: "co.vulcanlabs.moodtracker.lifetime2", latest: "pxx917144686" } //AI Chatbot: AI Chat Smith 4
 };
 
 //内购数据变量
