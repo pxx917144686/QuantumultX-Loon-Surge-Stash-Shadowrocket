@@ -67,6 +67,7 @@ var renewal = {
 // 根据 User-Agent 查找对应的产品ID，并返回模拟的收据信息
 for (var uaKey in uaProductMapping) {
   if (UA && UA.includes(uaKey)) {
+    console.log(`Matched ${uaKey}`);
     var productInfo = uaProductMapping[uaKey];
     var product_id = productInfo.product_id;
     receipt.product_id = product_id;
@@ -76,7 +77,7 @@ for (var uaKey in uaProductMapping) {
     pxx.latest_receipt_info = [receipt];
     pxx.pending_renewal_info = [renewal];
     pxx.latest_receipt = "chxm1023"; // 根据需要修改
-    console.log('Matched User-Agent, modified receipt data');
+    console.log('Modified receipt data:', JSON.stringify(pxx.receipt));
     break;
   }
 }
@@ -85,4 +86,3 @@ for (var uaKey in uaProductMapping) {
 pxx917144686 = pxx;
 console.log('Final response body:', JSON.stringify(pxx917144686)); // 输出最终响应体以调试
 $done({ body: JSON.stringify(pxx917144686) });
-
