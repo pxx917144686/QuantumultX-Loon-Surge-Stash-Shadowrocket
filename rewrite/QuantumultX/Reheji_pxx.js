@@ -13,7 +13,8 @@ let pxx917144686 = {}, pxx = JSON.parse(typeof $response != "undefined" && $resp
 const headers = $request.headers;
 const ua = headers['User-Agent'] || headers['user-agent'];
 const bundle_id = headers['X-Client-Bundle-ID'] || headers['x-client-bundle-id'];
-
+  $done({});
+}
 const list = [
   '%E8%B0%9C%E5%BA%95%E6%97%B6%E9%92%9F': { name: 'Entitlement.Pro', id: 'tech.miidii.MDClock.pro', cm: 'sjb' },  //目标地图,
 ];
