@@ -3,86 +3,93 @@
 AI_Chatbot Apple商店：https://apps.apple.com/us/app/ai-chatbot-ai-chat-smith-4/id1559479889
 [rewrite_local]
 ^https?:\/\/buy\.itunes\.apple\.com\/verifyReceipt$ url script-response-body https://raw.githubusercontent.com/pxx917144686/ios/master/rewrite/QuantumultX/AI_Chatbot.js
-[MITM]
+[mitm]
 hostname = buy.itunes.apple.com
-*/
 
-// 初始化
-var pxx917144686 = {};
-var pxx = JSON.parse(typeof $response != "undefined" && $response.body || null);
-var headers = {};
+*************************************/
 
-// 处理请求头中的 User-Agent
-for (var key in $request.headers) {
-  const reg = /^[a-z]+$/;
-  if (key === "User-Agent" && !reg.test(key)) {
-    var lowerkey = key.toLowerCase();
-    $request.headers[lowerkey] = $request.headers[key];
-    delete $request.headers[key];
-  }
-}
+var pxx917144686 = JSON.parse($response.body);
+const ua = $request.headers['User-Agent'] || $request.headers['user-agent'];
+const bundle_id = pxx917144686.receipt["bundle_id"] || pxx917144686.receipt["Bundle_Id"];
+const yearid = `${bundle_id}.year`;
+const yearlyid = `${bundle_id}.yearly`;
+const yearlysubscription = `${bundle_id}.yearlysubscription`;
+const lifetimeid = `${bundle_id}.lifetime`;
 
-// 获取 User-Agent
-var UA = $request.headers['user-agent'];
-console.log('User-Agent:', UA); // 输出 UA 以进行调试
-
-// 定义 User-Agent 到产品 ID 的映射
-var uaProductMapping = {
-  'MoodTracker': { product_id: 'co.vulcanlabs.moodtracker.lifetime2' },
-  'PicPro': { product_id: 'com.quangtm193.picpro1year' }
+const list = {
+  'com.quangtm193.picpro': { cm: 'timea', hx: 'hxpda', id: "com.quangtm193.picpro1year", latest: "pxx917144686" } //PicPro
 };
 
-// 模拟的收据数据
-var receipt = {
-  "quantity": "1",
-  "purchase_date_ms": "1686002766000",  
-  "expires_date": "2099-01-01 00:00:00 Etc/GMT",  
-  "expires_date_pst": "2099-01-01 00:00:00 America/Los_Angeles",  
-  "is_in_intro_offer_period": "false",  
-  "transaction_id": "123456789012345",  
-  "is_trial_period": "false",  
-  "original_transaction_id": "123456789012345",  
-  "purchase_date": "2023-06-06 06:06:06 Etc/GMT",  
-  "product_id": "co.vulcanlabs.moodtracker.lifetime2",  
-  "original_purchase_date_pst": "2023-06-06 06:06:06 America/Los_Angeles",  
-  "in_app_ownership_type": "PURCHASED",  
-  "subscription_group_identifier": "20877951",  
-  "original_purchase_date_ms": "1686002766000",  
-  "web_order_line_item_id": "123456789012345",  
-  "expires_date_ms": "4080082256000",  
-  "purchase_date_pst": "2023-06-06 06:06:06 America/Los_Angeles",  
-  "original_purchase_date": "2023-06-06 06:06:06 Etc/GMT" 
-};
+//内购数据变量
+const receipt = { "quantity": "1", "purchase_date_ms": "1694250549000", "is_in_intro_offer_period": "false", "transaction_id": "490001314520000", "is_trial_period": "false", "original_transaction_id": "490001314520000", "purchase_date": "2023-09-09 09:09:09 Etc/GMT", "product_id": yearlyid, "original_purchase_date_pst": "2023-09-09 02:09:10 America/Los_Angeles", "in_app_ownership_type": "PURCHASED", "original_purchase_date_ms": "1694250550000", "web_order_line_item_id": "490000123456789", "purchase_date_pst": "2023-09-09 02:09:09 America/Los_Angeles", "original_purchase_date": "2023-09-09 09:09:10 Etc/GMT" };
+const expirestime = { "expires_date": "2099-09-09 09:09:09 Etc/GMT", "expires_date_pst": "2099-09-09 06:06:06 America/Los_Angeles", "expires_date_ms": "4092599349000", };
+let anchor = false;
+let data;
 
-// 定义自动续期相关数据
-var renewal = {
-  "expiration_intent": "1",
-  "product_id": "co.vulcanlabs.moodtracker.lifetime2",  
-  "is_in_billing_retry_period": "0",  
-  "auto_renew_product_id": "co.vulcanlabs.moodtracker.lifetime2",  
-  "original_transaction_id": "123456789012345",  
-  "auto_renew_status": "0"  
-};
-
-// 根据 User-Agent 查找对应的产品ID，并返回模拟的收据信息
-for (var uaKey in uaProductMapping) {
-  if (UA && UA.includes(uaKey)) {
-    console.log(`Matched ${uaKey}`);
-    var productInfo = uaProductMapping[uaKey];
-    var product_id = productInfo.product_id;
-    receipt.product_id = product_id;
-    renewal.product_id = product_id;
-    renewal.auto_renew_product_id = product_id;
-    pxx.receipt.in_app = [receipt];
-    pxx.latest_receipt_info = [receipt];
-    pxx.pending_renewal_info = [renewal];
-    pxx.latest_receipt = "chxm1023"; // 根据需要修改
-    console.log('Modified receipt data:', JSON.stringify(pxx.receipt));
+// 核心内容处理
+for (const i in list) {
+  const regex = new RegExp(`^${i}`, `i`);
+  if (regex.test(ua) || regex.test(bundle_id)) {
+    const { cm, hx, id, ids, latest, version } = list[i];
+    const receiptdata = Object.assign({}, receipt, { "product_id": id });
+    //处理数据
+    switch (cm) {
+      case 'timea':
+        data = [ Object.assign({}, receiptdata, expirestime)];
+        break;
+      case 'timeb':
+        data = [receiptdata];
+        break;
+      case 'timec':
+        data = [];
+        break;
+      case 'timed':
+        data = [
+          Object.assign({}, receiptdata, expirestime, { "product_id": ids }),
+          Object.assign({}, receiptdata, expirestime, { "product_id": id })
+        ];
+        break;
+    }
+    //处理核心收尾
+    if (hx.includes('hxpda')) {
+      pxx917144686["receipt"]["in_app"] = data;
+      pxx917144686["latest_receipt_info"] = data;
+      pxx917144686["pending_renewal_info"] = [{ "product_id": id, "original_transaction_id": "490001314520000", "auto_renew_product_id": id, "auto_renew_status": "1" }];
+      pxx917144686["latest_receipt"] = latest;
+    }
+    else if (hx.includes('hxpdb')) {
+      pxx917144686["receipt"]["in_app"] = data;
+    }
+    else if (hx.includes('hxpdc')) {
+      const xreceipt = { "expires_date_formatted" : "2099-09-09 09:09:09 Etc/GMT", "expires_date" : "4092599349000", "expires_date_formatted_pst" : "2099-09-09 06:06:06 America/Los_Angeles", "product_id" : id, };
+      pxx917144686["receipt"] = Object.assign({}, pxx917144686["receipt"], xreceipt);
+      pxx917144686["latest_receipt_info"] = Object.assign({}, pxx917144686["receipt"], xreceipt);
+      pxx917144686["status"] = 0;
+      pxx917144686["auto_renew_status"] = 1;
+      pxx917144686["auto_renew_product_id"] = id;
+      delete pxx917144686["latest_expired_receipt_info"];
+      delete pxx917144686["expiration_intent"];
+    }
+    // 判断是否需要加入版本号
+    if (version && version.trim() !== '') { pxx917144686["receipt"]["original_application_version"] = version; }
+    anchor = true;
+    console.log('操作成功');
     break;
   }
 }
 
-// 返回修改后的响应
-pxx917144686 = pxx;
-console.log('Final response body:', JSON.stringify(pxx917144686)); // 输出最终响应体以调试
+// 如果没有匹配到 UA 或 bundle_id 使用备用方案
+if (!anchor) {
+  data = [ Object.assign({}, receipt, expirestime)];
+  pxx917144686["receipt"]["in_app"] = data;
+  pxx917144686["latest_receipt_info"] = data;
+  pxx917144686["pending_renewal_info"] = [{ "product_id": yearlyid, "original_transaction_id": "490001314520000", "auto_renew_product_id": yearlyid, "auto_renew_status": "1" }];
+  pxx917144686["latest_receipt"] = "pxx917144686";
+  console.log('使用备用方案');
+}
+
+pxx917144686["Telegram"] = "测试";
+pxx917144686["warning"] = "测试";
+
 $done({ body: JSON.stringify(pxx917144686) });
+
