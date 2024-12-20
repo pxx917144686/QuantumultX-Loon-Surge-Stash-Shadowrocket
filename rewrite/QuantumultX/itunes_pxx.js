@@ -17,7 +17,7 @@ const yearlysubscription = `${bundle_id}.yearlysubscription`;
 const lifetimeid = `${bundle_id}.lifetime`;
 
 const list = {
-  'com.LuoWei.aDiary': { cm: 'timea', hx: 'hxpda', id: "com.LuoWei.aDiary.yearly0", latest: "pxx917144686" },  //aDiary
+  'ChickAlarmClock': { cm: 'timea', hx: 'hxpda', id: "com.ChickFocus.ChickFocus.yearly_2023_promo", latest: "pxx917144686" },  //小鸡专注
   'co.vulcanlabs.moodtracker': { cm: 'timea', hx: 'hxpda', id: "co.vulcanlabs.moodtracker.lifetime2", latest: "pxx917144686" } //AI Chatbot: AI Chat Smith 4
 };
 
