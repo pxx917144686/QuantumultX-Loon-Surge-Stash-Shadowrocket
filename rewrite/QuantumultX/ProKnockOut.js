@@ -5,16 +5,16 @@ https:\/\/buy\.itunes\.apple\.com\/verifyReceipt url script-response-body https:
 [MITM]
 hostname = buy.itunes.apple.com
 */
-let obj = JSON.parse($response.body);
-let requestUrl = $request.url;
-let notifyState = false;
-let name = "ProKnockOut";
-let productName = "com.loveyouchenapps.knockout";
-let productType = "com.knockout.SVIP.50off";
-let appVersion = "5";
 
-if (/^https:\/\/buy\.itunes\.apple\.com\/verifyReceipt?/.test(requestUrl) && $request.headers["User-Agent"].includes(name)) {
-    let receipt = {
+const obj = JSON.parse($response.body);
+const { url, headers } = $request;
+const name = "ProKnockOut";
+const productName = "com.loveyouchenapps.knockout";
+const productType = "com.knockout.SVIP.50off";
+const appVersion = "5";
+
+if (/^https:\/\/buy\.itunes\.apple\.com\/verifyReceipt/.test(url) && headers["User-Agent"].includes(name)) {
+    const receipt = {
         receipt_type: "Production",
         bundle_id: productName,
         in_app: [{
@@ -25,42 +25,19 @@ if (/^https:\/\/buy\.itunes\.apple\.com\/verifyReceipt?/.test(requestUrl) && $re
             in_app_ownership_type: "PURCHASED",
             purchase_date: "2023-08-14 15:27:40 Etc/GMT",
             purchase_date_ms: "1691972860000",
-            purchase_date_pst: "2023-08-14 08:27:40 America/Los_Angeles",
-            original_purchase_date: "2023-08-14 08:24:40 Etc/GMT",
-            original_purchase_date_ms: "1692026680000",
-            original_purchase_date_pst: "2023-08-14 08:24:40 America/Los_Angeles",
             expires_date: "2222-02-02 02:02:02 Etc/GMT",
-            expires_date_pst: "2222-02-02 02:02:02 America/Los_Angeles",
             expires_date_ms: "7955085722000",
         }],
         adam_id: 1111111111,
         receipt_creation_date_pst: "2023-08-14 08:25:04 America/Los_Angeles",
-        request_date: "2023-08-14 15:27:40 Etc/GMT",
-        request_date_pst: "2023-08-14 08:27:40 America/Los_Angeles",
-        version_external_identifier: 666666666,
-        request_date_ms: "1692026860531",
-        original_purchase_date_pst: "2023-08-14 08:24:40 America/Los_Angeles",
         application_version: appVersion,
-        original_purchase_date_ms: "1692026680000",
-        receipt_creation_date_ms: "1691972704000",
-        original_application_version: appVersion,
-        download_id: 666666666666666666,
         latest_receipt_info: [{
             quantity: "1",
             transaction_id: "666666666666667",
             original_transaction_id: "666666666666667",
             product_id: productType,
             in_app_ownership_type: "PURCHASED",
-            is_in_intro_offer_period: "false",
-            is_trial_period: "false",
-            purchase_date: "2023-08-14 15:27:40 Etc/GMT",
-            purchase_date_ms: "1691972860000",
-            purchase_date_pst: "2023-08-14 08:27:40 America/Los_Angeles",
-            original_purchase_date: "2023-08-14 08:24:40 Etc/GMT",
-            original_purchase_date_ms: "1692026680000",
-            original_purchase_date_pst: "2023-08-14 08:24:40 America/Los_Angeles",
             expires_date: "2222-02-02 02:02:02 Etc/GMT",
-            expires_date_pst: "2222-02-02 02:02:02 America/Los_Angeles",
             expires_date_ms: "7955085722000",
         }],
         pending_renewal_info: [{
@@ -77,15 +54,6 @@ if (/^https:\/\/buy\.itunes\.apple\.com\/verifyReceipt?/.test(requestUrl) && $re
     obj.latest_receipt = "";
     obj.pending_renewal_info = receipt.pending_renewal_info;
     obj.receipt = receipt;
-
-    if (notifyState) {
-        $notify("执行", "", "解锁成功", {
-            "open-url": "404",
-            "media-url": "404",
-        });
-    }
 }
 
-$done({
-    body: JSON.stringify(obj)
-});
+$done({ body: JSON.stringify(obj) });
