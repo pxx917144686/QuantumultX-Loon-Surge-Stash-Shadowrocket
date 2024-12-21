@@ -5,13 +5,14 @@
 ^https:\/\/api\.(revenuecat|rc-backup)\.com\/.+\/(receipts$|subscribers\/?(.*?)*$) url script-response-body https://raw.githubusercontent.com/pxx917144686/QuantumultX-Loon-Surge-Stash-Shadowrocket/refs/heads/master/rewrite/QuantumultX/Reheji_xxx.js
 ^https:\/\/api\.(revenuecat|rc-backup)\.com\/.+\/(receipts$|subscribers\/?(.*?)*$) url script-request-header https://raw.githubusercontent.com/pxx917144686/QuantumultX-Loon-Surge-Stash-Shadowrocket/refs/heads/master/rewrite/QuantumultX/Reheji_xxx.js
 [mitm]
-hostname = api.revenuecat.com, api.rc-backup.com
+hostname = api.revenuecat.com, api.rc-backup.com, api.myoland.com,
 
 *************************************/
 let chxm1024 = {}, chxm1023 = JSON.parse(typeof $response != "undefined" && $response.body || "{}");
 const headers = $request.headers, ua = headers['User-Agent'] || headers['user-agent'], bundle_id = headers['X-Client-Bundle-ID'] || headers['x-client-bundle-id'];
 
 const bundle = {
+  'com.myoland.miraa': { name: 'pro', id: 'characters', cm: 'sja' },
   'com.apporigins.Sleepo': { name: 'pro', id: 'sleepo_premium_lifetime_free', cm: 'sja' },  //Sleepo
   'in.capcap.app': { name: 'pro', id: 'in.capcap.subscription.pro.weekly.non.trial', cm: 'sja' },  //字幕生成器
   'net.smayer.bodydata': { name: 'pro', id: 'RemoveAds', cm: 'sja' }  //体重指数计算器
