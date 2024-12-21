@@ -17,6 +17,7 @@ const yearlysubscription = `${bundle_id}.yearlysubscription`;
 const lifetimeid = `${bundle_id}.lifetime`;
 
 const list = {
+  'ProKnockOut': { cm: 'timeb', hx: 'hxpda', id: "com.knockout.SVIP.50off", latest: "pxx917144686" },  //ProKnockOut
   'me.imgbase.imgplay': { cm: 'timea', hx: 'hxpda', id: "me.imgbase.imgplay.subscriptionYearly", latest: "pxx917144686" }, //ImgPlay: GIF Maker
   'MVH6DNU2ZP.input': { cm: 'timea', hx: 'hxpda', id: "com.logcg.loginput", latest: "pxx917144686" }, //落格输入法 经典版
   'ChickAlarmClock': { cm: 'timea', hx: 'hxpda', id: "com.ChickFocus.ChickFocus.yearly_2023_promo", latest: "pxx917144686" }, //小鸡专注
