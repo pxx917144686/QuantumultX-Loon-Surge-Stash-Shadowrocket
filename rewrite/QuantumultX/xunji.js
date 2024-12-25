@@ -2,7 +2,7 @@
 训记 
 [rewrite_local]
 #训记vip
-^https:\/\/api\.xunjiapp\.cn\/whole_user_info url script-response-body https://raw.githubusercontent.com/pxx917144686/ios/master/rewrite/QuantumultX/Xunji.js
+^https:\/\/api\.xunjiapp\.cn\/whole_user_info url script-response-body https://raw.githubusercontent.com/pxx917144686/QuantumultX-Loon-Surge-Stash-Shadowrocket/refs/heads/master/rewrite/QuantumultX/Xunji.js
 [mitm]
 hostname = api.xunjiapp.cn
 */
