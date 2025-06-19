@@ -5,32 +5,20 @@
 
 [rewrite_local]
 # Apple官方验证
-^https?:\/\/buy\.itunes\.apple\.com\/verifyReceipt$ url script-response-body SatellaJailed_Ultra.js
+^https?:\/\/buy\.itunes\.apple\.com\/verifyReceipt$ url script-response-body https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/master/SatellaJailed_Ultra.js
 
-# RevenueCat验证端点 - 修正版
-^https:\/\/api\.(revenuecat|rc-backup)\.com\/.+\/(receipts$|subscribers\/?(.*?)*$) url script-response-body SatellaJailed_Ultra.js
+# RevenueCat验证 - 请求和响应都处理
+^https:\/\/api\.(revenuecat|rc-backup)\.com\/.+\/(receipts$|subscribers\/?(.*?)*$) url script-response-body https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/master/SatellaJailed_Ultra.js
+^https:\/\/api\.(revenuecat|rc-backup)\.com\/.+\/(receipts$|subscribers\/?(.*?)*$) url script-request-header https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/master/SatellaJailed_Ultra.js
 
 # Paddle验证
-^https?:\/\/v3\.paddleapi\.com\/3\.2\/license\/(verify|activate) url script-response-body SatellaJailed_Ultra.js
-^https?:\/\/checkout\.paddle\.com\/api\/1\.0\/order url script-response-body SatellaJailed_Ultra.js
+^https?:\/\/v3\.paddleapi\.com\/3\.2\/license\/(verify|activate) url script-response-body https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/master/SatellaJailed_Ultra.js
 
-# 更全面的关键字匹配 - 常见验证端点关键词
-^https?:\/\/.*\/(verify|validate|check|avail|receipt|subscriptions?|purchase|transaction|validate_receipt|subscription\/status|subscription\/validate|receipt\/validate)($|\/) url script-response-body SatellaJailed_Ultra.js
-
-# 常见API请求路径匹配
-^https?:\/\/.*\/(api|sdk)\/(verify|validate|subscription|receipt|subscriber|validate_receipt|purchase|subscription\/status)($|\/) url script-response-body SatellaJailed_Ultra.js
-
-# 常见内购状态检查端点
-^https?:\/\/.*\/subscription\/(status|validate|verify) url script-response-body SatellaJailed_Ultra.js
-
-# 常见数据库格式后缀匹配
-^https?:\/\/.*\/(receipts?|subscriptions?|purchases?|transaction|validate|status|validate_receipt)\.(json|xml|plist)($|\?) url script-response-body SatellaJailed_Ultra.js
-
-# 通用JSON响应监听
-^https?:\/\/[^*]+(\?.*)?$ url script-response-header SatellaJailed_Detector.js
+# 通用验证端点
+^https?:\/\/.*\/(verify|validate|receipt|subscription)($|\/) url script-response-body https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/master/SatellaJailed_Ultra.js
 
 [mitm]
-hostname = buy.itunes.apple.com, api.revenuecat.com, api.rc-backup.com, *.paddle*.com, v3.paddleapi.com, checkout.paddle.com, *.firebaseio.com, *.cloudfunctions.net, *.googleapis.com, *.surge.sh, *.appspot.com, *.herokuapp.com, *.azurewebsites.net, *.vercel.app, *.akamaized.net, *.s3.amazonaws.com, *.cloudfront.net, *.app.link, *.amplitude.com, *-api.*, *.api.*, api.*.*, subscription.*.*, *.subscription.*
+hostname = buy.itunes.apple.com, api.revenuecat.com, api.rc-backup.com, v3.paddleapi.com
 
 
 
