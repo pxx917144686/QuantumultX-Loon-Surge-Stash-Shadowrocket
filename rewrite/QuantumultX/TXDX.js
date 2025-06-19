@@ -10,9 +10,8 @@ const bundleId = "vsmedia.de.imagesize";
 const productId = "vsmedia.de.imagesize.premium";
 
 function createReceipt() {
-  // 创建当前时间戳和过期时间戳(2099年)
   const currentTs = Math.floor(Date.now() / 1000);
-  const expiryTs = 4070908800000; // 2099年
+  const expiryTs = 4070908800000;
   const expiryDate = "2099-01-01 00:00:00 Etc/GMT";
   const purchaseDate = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, ' Etc/GMT');
   const purchaseTs = currentTs * 1000;
@@ -65,18 +64,13 @@ function createReceipt() {
   };
 }
 
-// 主函数
 function main() {
   let obj = JSON.parse($response.body || '{}');
   console.log('原始响应: ' + JSON.stringify(obj).substring(0, 50) + '...');
-  
-  // 检查是否为收据验证响应
   if (obj && (obj.receipt || obj.status !== undefined)) {
     console.log('检测到收据验证请求，替换为伪造收据');
     obj = createReceipt();
   }
-  
-  // 处理特定应用的额外数据
   if (obj.app_info && obj.app_info.package_name === bundleId) {
     console.log('检测到应用特定信息，添加高级状态标记');
     obj.premium_access = true;
@@ -87,8 +81,6 @@ function main() {
       "premium_tools": true
     };
   }
-  
-  // 返回修改后的响应
   $done({body: JSON.stringify(obj)});
 }
 
