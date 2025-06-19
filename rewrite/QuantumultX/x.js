@@ -1,623 +1,349 @@
-/**
- * 有问题 联系 pxx917144686
- */
-
 
 [rewrite_local]
 # Apple官方验证
-^https?:\/\/buy\.itunes\.apple\.com\/verifyReceipt$ url script-response-body https://raw.githubusercontent.com/pxx917144686/QuantumultX-Loon-Surge-Stash-Shadowrocket/refs/heads/master/rewrite/QuantumultX/x.js
+^https?:\/\/buy\.itunes\.apple\.com\/verifyReceipt$ url script-response-body https://raw.githubusercontent.com/您的用户名/您的仓库名/master/SatellaJailed_QX.js
 
-# RevenueCat验证 - 请求和响应都处理
-^https:\/\/api\.(revenuecat|rc-backup)\.com\/.+\/(receipts$|subscribers\/?(.*?)*$) url script-response-body https://raw.githubusercontent.com/pxx917144686/QuantumultX-Loon-Surge-Stash-Shadowrocket/refs/heads/master/rewrite/QuantumultX/x.js
-^https:\/\/api\.(revenuecat|rc-backup)\.com\/.+\/(receipts$|subscribers\/?(.*?)*$) url script-request-header https://raw.githubusercontent.com/pxx917144686/QuantumultX-Loon-Surge-Stash-Shadowrocket/refs/heads/master/rewrite/QuantumultX/x.js
-
-# Paddle验证
-^https?:\/\/v3\.paddleapi\.com\/3\.2\/license\/(verify|activate) url script-response-body https://raw.githubusercontent.com/pxx917144686/QuantumultX-Loon-Surge-Stash-Shadowrocket/refs/heads/master/rewrite/QuantumultX/x.js
-
-# 通用验证端点
-^https?:\/\/.*\/(verify|validate|receipt|subscription)($|\/) url script-response-body https://raw.githubusercontent.com/pxx917144686/QuantumultX-Loon-Surge-Stash-Shadowrocket/refs/heads/master/rewrite/QuantumultX/x.js
+# RevenueCat验证
+^https:\/\/api\.(revenuecat|rc-backup)\.com\/.+\/(receipts$|subscribers\/?(.*?)*$) url script-response-body https://raw.githubusercontent.com/您的用户名/您的仓库名/master/SatellaJailed_QX.js
+^https:\/\/api\.(revenuecat|rc-backup)\.com\/.+\/(receipts$|subscribers\/?(.*?)*$) url script-request-header https://raw.githubusercontent.com/您的用户名/您的仓库名/master/SatellaJailed_QX.js
 
 [mitm]
-hostname = buy.itunes.apple.com, api.revenuecat.com, api.rc-backup.com, v3.paddleapi.com
+hostname = buy.itunes.apple.com, api.revenuecat.com, api.rc-backup.com
 
-
-
-/**
- * 智能侦测器
- * 分析JSON响应，自动判断是否为内购验证相关内容
- */
+*************************************/
 
 (function() {
   const $ = {};
-  $.response = $response;
   $.request = $request;
+  $.response = $response;
   $.done = (obj) => $done(obj);
   
-  // 仅处理JSON响应
-  const contentType = $.response.headers['Content-Type'] || $.response.headers['content-type'] || '';
-  if (!contentType.includes('json') && !contentType.includes('javascript')) {
-    return $.done({});
-  }
-  
-  try {
-    // 解析响应体
-    const body = JSON.parse($.response.body || '{}');
-    
-    // 内购相关关键字列表
-    const subscriptionKeywords = [
-      'subscript', 'premium', 'vip', 'plus', 'pro', 'expire', 'trial', 'member',
-      'active', 'status', 'valid', 'unlock', 'receipt', 'purchase', 'transaction',
-      'entitlement', 'account_type', 'access', 'level', 'plan', 'billing', 'tier'
-    ];
-    
-    // 分析响应体中是否包含相关关键字
-    const bodyStr = JSON.stringify(body).toLowerCase();
-    const isPossibleSubscription = subscriptionKeywords.some(keyword => 
-      bodyStr.includes(keyword.toLowerCase())
-    );
-    
-    // 如果是可能的订阅内容，添加特殊标记转发给主脚本处理
-    if (isPossibleSubscription) {
-      console.log(`[SatellaJailed_Detector] 检测到可能的内购验证响应: ${$.request.url}`);
-      
-      // 添加自定义标记
-      body['_SatellaDetected'] = true;
-      
-      // 返回已标记的响应体，让主脚本进一步处理
-      const modifiedBody = JSON.stringify(body);
-      
-      // 调用主处理脚本
-      return $.done({
-        body: modifiedBody,
-        headers: {
-          'X-SatellaJailed-Detector': 'DETECTED'
-        }
-      });
-    }
-  } catch (e) {
-    console.log(`[SatellaJailed_Detector] 解析错误: ${e}`);
-  }
-  
-  // 不是内购验证相关的响应，保持原样
-  return $.done({});
-})();
-
-
-
-
-
-
-
-
-
-
-/**
- * SatellaJailed超级版
- * 全网内购验证智能拦截处理系统
- */
-
-(function() {
-  const $ = {};
-  $.response = $response;
-  $.request = $request;
-  $.done = (obj) => $done(obj);
-  
-  // 请求和响应信息
+  // 请求URL
   const url = $.request.url;
-  const method = $.request.method || "GET";
-  const headers = $.request.headers || {};
-  const ua = headers['User-Agent'] || headers['user-agent'] || '';
   
-  // 解析响应体
-  let body;
-  try {
-    body = JSON.parse($.response.body || '{}');
-  } catch (e) {
-    // 非JSON响应
-    console.log(`[SatellaJailed] 非JSON响应或解析失败: ${e}`);
-    return $.done({});
+  // 处理不同类型的请求
+  if (url.includes('buy.itunes.apple.com/verifyReceipt')) {
+    handleAppleReceipt();
+  } else if (url.includes('api.revenuecat.com') || url.includes('api.rc-backup.com')) {
+    if ($.response && $.response.body) {
+      handleRevenueCat();
+    } else {
+      // 处理请求头
+      handleRevenueCatHeader();
+    }
+  } else {
+    // 其他未知类型，尝试通用处理
+    handleGeneric();
   }
   
-  // 检查是否是侦测器转发的请求
-  const isDetected = headers['X-SatellaJailed-Detector'] === 'DETECTED' || body['_SatellaDetected'] === true;
-  if (body['_SatellaDetected']) delete body['_SatellaDetected'];
-  
-  console.log(`[SatellaJailed] 处理请求: ${url.substring(0, 100)}...`);
-  if (isDetected) {
-    console.log(`[SatellaJailed] 来源: 侦测器转发`);
-  }
-  
-  // 自动识别端点类型
-  function identifyEndpointType() {
-    // Apple验证
-    if (url.includes('buy.itunes.apple.com/verifyReceipt')) {
-      return 'APPLE';
-    }
+  /**
+   * 处理Apple收据验证
+   */
+  function handleAppleReceipt() {
+    let body = JSON.parse($.response.body);
+    const ua = $.request.headers['User-Agent'] || $.request.headers['user-agent'] || '';
+    const bundle_id = body.receipt?.bundle_id || body.receipt?.Bundle_Id || '';
+    const yearlyid = `${bundle_id}.yearly`;
+    const lifetimeid = `${bundle_id}.lifetime`;
     
-    // RevenueCat验证
-    if (url.includes('api.revenuecat.com') || url.includes('api.rc-backup.com')) {
-      return 'REVENUECAT';
-    }
+    console.log(`[SatellaJailed] 处理Apple验证: ${bundle_id}`);
     
-    // Paddle验证
-    if (url.includes('paddle') && (url.includes('/verify') || url.includes('/license/') || url.includes('/order'))) {
-      return 'PADDLE';
-    }
+    // 扩展应用列表 (结合SatellaJailed覆盖的应用)
+    const list = {
+      'ProKnockOut': { cm: 'timeb', hx: 'hxpda', id: "com.knockout.SVIP.50off", latest: "SatellaJailed" },
+      'me.imgbase.imgplay': { cm: 'timea', hx: 'hxpda', id: "me.imgbase.imgplay.subscriptionYearly", latest: "SatellaJailed" },
+      'MVH6DNU2ZP.input': { cm: 'timea', hx: 'hxpda', id: "com.logcg.loginput", latest: "SatellaJailed" },
+      'ChickAlarmClock': { cm: 'timea', hx: 'hxpda', id: "com.ChickFocus.ChickFocus.yearly_2023_promo", latest: "SatellaJailed" },
+      'co.vulcanlabs.moodtracker': { cm: 'timea', hx: 'hxpda', id: "co.vulcanlabs.moodtracker.lifetime2", latest: "SatellaJailed" },
+      // 添加更多SatellaJailed支持的应用
+      'com.apple.Keynote': { cm: 'timea', hx: 'hxpda', id: "com.apple.Keynote.premium", latest: "SatellaJailed" },
+      'com.apple.Numbers': { cm: 'timea', hx: 'hxpda', id: "com.apple.Numbers.premium", latest: "SatellaJailed" },
+      'com.apple.Pages': { cm: 'timea', hx: 'hxpda', id: "com.apple.Pages.premium", latest: "SatellaJailed" },
+      'net.shinyfrog.bear': { cm: 'timea', hx: 'hxpda', id: "net.shinyfrog.bear_iOS.pro_yearly_subscription", latest: "SatellaJailed" },
+      'photo.editor.polarr': { cm: 'timea', hx: 'hxpda', id: "co.polarr.polarrphotoeditor.pro.yearly", latest: "SatellaJailed" }
+    };
     
-    // 检查URL路径关键字
-    const urlPathKeywords = [
-      'verify', 'validate', 'receipt', 'subscription', 'purchase', 'transaction'
-    ];
+    // 内购数据变量
+    const now = new Date();
+    const expiration = new Date('2099-09-09');
+    const txId = Math.floor(Math.random() * 900000000000000) + 100000000000000;
     
-    for (const keyword of urlPathKeywords) {
-      if (url.includes(`/${keyword}`) || url.includes(`/${keyword}s`)) {
-        return 'KEYWORD_MATCH';
+    const receipt = { 
+      "quantity": "1", 
+      "purchase_date_ms": now.getTime().toString(), 
+      "is_in_intro_offer_period": "false", 
+      "transaction_id": txId.toString(), 
+      "is_trial_period": "false", 
+      "original_transaction_id": txId.toString(), 
+      "purchase_date": formatDate(now), 
+      "product_id": yearlyid, 
+      "original_purchase_date_pst": formatPSTDate(now), 
+      "in_app_ownership_type": "PURCHASED", 
+      "original_purchase_date_ms": now.getTime().toString(), 
+      "web_order_line_item_id": (txId + 1).toString(), 
+      "purchase_date_pst": formatPSTDate(now), 
+      "original_purchase_date": formatDate(now) 
+    };
+    
+    const expirestime = { 
+      "expires_date": formatDate(expiration), 
+      "expires_date_pst": formatPSTDate(expiration), 
+      "expires_date_ms": expiration.getTime().toString() 
+    };
+    
+    let anchor = false;
+    let data;
+    
+    // 核心内容处理
+    for (const i in list) {
+      const regex = new RegExp(`^${i}`, `i`);
+      if (regex.test(ua) || regex.test(bundle_id)) {
+        const { cm, hx, id, ids, latest, version } = list[i];
+        const receiptdata = Object.assign({}, receipt, { "product_id": id });
+        
+        // 处理数据
+        switch (cm) {
+          case 'timea':
+            data = [ Object.assign({}, receiptdata, expirestime)];
+            break;
+          case 'timeb':
+            data = [receiptdata];
+            break;
+          case 'timec':
+            data = [];
+            break;
+          case 'timed':
+            data = [
+              Object.assign({}, receiptdata, expirestime, { "product_id": ids }),
+              Object.assign({}, receiptdata, expirestime, { "product_id": id })
+            ];
+            break;
+        }
+        
+        // 处理核心收尾
+        if (hx.includes('hxpda')) {
+          body["receipt"]["in_app"] = data;
+          body["latest_receipt_info"] = data;
+          body["pending_renewal_info"] = [{ "product_id": id, "original_transaction_id": txId.toString(), "auto_renew_product_id": id, "auto_renew_status": "1" }];
+          body["latest_receipt"] = latest;
+        }
+        else if (hx.includes('hxpdb')) {
+          body["receipt"]["in_app"] = data;
+        }
+        else if (hx.includes('hxpdc')) {
+          const xreceipt = { "expires_date_formatted" : formatDate(expiration), "expires_date" : expiration.getTime().toString(), "expires_date_formatted_pst" : formatPSTDate(expiration), "product_id" : id, };
+          body["receipt"] = Object.assign({}, body["receipt"], xreceipt);
+          body["latest_receipt_info"] = Object.assign({}, body["receipt"], xreceipt);
+          body["status"] = 0;
+          body["auto_renew_status"] = 1;
+          body["auto_renew_product_id"] = id;
+          delete body["latest_expired_receipt_info"];
+          delete body["expiration_intent"];
+        }
+        
+        // 判断是否需要加入版本号
+        if (version && version.trim() !== '') { body["receipt"]["original_application_version"] = version; }
+        anchor = true;
+        console.log(`[SatellaJailed] 操作成功: ${bundle_id}, 使用产品ID: ${id}`);
+        break;
       }
     }
     
-    // 深入分析响应结构
-    return analyzeResponseStructure(body);
-  }
-  
-  // 深度分析响应结构，猜测验证类型
-  function analyzeResponseStructure(responseBody) {
-    // 检查Apple收据特征
-    if (responseBody.receipt || responseBody.status !== undefined || responseBody.latest_receipt) {
-      return 'APPLE';
+    // 如果没有匹配到 UA 或 bundle_id 使用备用方案 (SatellaJailed的通用处理)
+    if (!anchor) {
+      // 尝试猜测最可能的产品ID
+      const possibleIds = [
+        `${bundle_id}.yearly`, 
+        `${bundle_id}.year`,
+        `${bundle_id}.annual`, 
+        `${bundle_id}.pro`,
+        `${bundle_id}.premium`,
+        `${bundle_id}.plus`,
+        `${bundle_id}.vip`, 
+        `${bundle_id}.lifetime`
+      ];
+      
+      const productId = possibleIds[0]; // 使用第一个可能的ID
+      data = [ Object.assign({}, receipt, expirestime, { "product_id": productId })];
+      
+      body["receipt"]["in_app"] = data;
+      body["latest_receipt_info"] = data;
+      body["pending_renewal_info"] = [{ "product_id": productId, "original_transaction_id": txId.toString(), "auto_renew_product_id": productId, "auto_renew_status": "1" }];
+      body["latest_receipt"] = "SatellaJailed_QX_" + Math.random().toString(36).substring(2,7);
+      body["status"] = 0;
+      
+      console.log(`[SatellaJailed] 使用备用方案: ${bundle_id}, 产品ID: ${productId}`);
     }
     
-    // 检查RevenueCat特征
-    if (responseBody.subscriber || responseBody.entitlements || 
-        (responseBody.offerings && responseBody.products)) {
-      return 'REVENUECAT';
+    body["SatellaJailed"] = "QuantumultX版";
+    $.done({ body: JSON.stringify(body) });
+  }
+  
+  /**
+   * 处理RevenueCat验证
+   */
+  function handleRevenueCat() {
+    try {
+      let body = JSON.parse($.response.body);
+      console.log(`[SatellaJailed] 处理RevenueCat响应`);
+      
+      const now = new Date();
+      const expiration = new Date('2099-09-09');
+      
+      // 1. 处理subscriber信息
+      if (body.subscriber) {
+        // 处理订阅信息
+        if (body.subscriber.subscriptions) {
+          for (const key in body.subscriber.subscriptions) {
+            body.subscriber.subscriptions[key] = {
+              "purchase_date": now.toISOString(),
+              "expires_date": expiration.toISOString(),
+              "is_sandbox": false,
+              "original_purchase_date": now.toISOString(),
+              "period_type": "normal",
+              "ownership_type": "PURCHASED",
+              "store": "app_store",
+              "unsubscribe_detected_at": null
+            };
+          }
+          
+          // 如果没有订阅，添加一个默认订阅
+          if (Object.keys(body.subscriber.subscriptions).length === 0) {
+            const defaultKey = "default_subscription";
+            body.subscriber.subscriptions[defaultKey] = {
+              "purchase_date": now.toISOString(),
+              "expires_date": expiration.toISOString(),
+              "is_sandbox": false,
+              "original_purchase_date": now.toISOString(),
+              "period_type": "normal",
+              "ownership_type": "PURCHASED",
+              "store": "app_store",
+              "unsubscribe_detected_at": null
+            };
+          }
+        }
+        
+        // 处理权益信息
+        if (body.subscriber.entitlements) {
+          for (const key in body.subscriber.entitlements) {
+            body.subscriber.entitlements[key] = {
+              "expires_date": expiration.toISOString(),
+              "product_identifier": Object.keys(body.subscriber.subscriptions)[0] || "default_subscription",
+              "purchase_date": now.toISOString()
+            };
+          }
+          
+          // 如果没有权益，添加默认权益
+          if (Object.keys(body.subscriber.entitlements).length === 0) {
+            body.subscriber.entitlements["premium"] = {
+              "expires_date": expiration.toISOString(),
+              "product_identifier": Object.keys(body.subscriber.subscriptions)[0] || "default_subscription",
+              "purchase_date": now.toISOString()
+            };
+          }
+        }
+      }
+      
+      console.log(`[SatellaJailed] RevenueCat处理完成`);
+      $.done({ body: JSON.stringify(body) });
+    } catch (e) {
+      console.log(`[SatellaJailed] RevenueCat处理错误: ${e}`);
+      $.done({});
     }
-    
-    // 检查常见订阅响应模式
-    if (responseBody.subscription || responseBody.subscriptions || 
-        responseBody.premium !== undefined || responseBody.is_premium !== undefined ||
-        responseBody.active !== undefined || responseBody.isActive !== undefined ||
-        responseBody.pro !== undefined || responseBody.isPro !== undefined) {
-      return 'SUBSCRIPTION';
+  }
+  
+  /**
+   * 处理RevenueCat请求头
+   */
+  function handleRevenueCatHeader() {
+    try {
+      console.log(`[SatellaJailed] 处理RevenueCat请求头`);
+      // 修改请求头以绕过验证
+      const headers = $.request.headers;
+      
+      // 添加或修改特定头信息可能有助于绕过验证
+      // 这部分需要根据具体情况调整
+      
+      $.done({ headers: headers });
+    } catch (e) {
+      console.log(`[SatellaJailed] RevenueCat请求头处理错误: ${e}`);
+      $.done({});
     }
-    
-    return 'GENERIC';
   }
   
-  // 提取应用标识
-  function extractAppInfo() {
-    // 从响应中提取
-    const bundleId = body.receipt?.bundle_id || body.receipt?.Bundle_Id || '';
-    
-    // 从URL中提取可能的应用标识
-    const urlMatches = url.match(/\/([a-zA-Z][a-zA-Z0-9\-\_\.]+\.[a-zA-Z0-9\-\_\.]+)\//);
-    const urlBundleId = urlMatches ? urlMatches[1] : '';
-    
-    // 从UA中提取
-    const uaMatches = ua.match(/([a-zA-Z][a-zA-Z0-9\-\_\.]+\.[a-zA-Z0-9\-\_\.]+)/);
-    const uaBundleId = uaMatches ? uaMatches[1] : '';
-    
-    return bundleId || urlBundleId || uaBundleId || generateRandomBundleId();
+  /**
+   * 处理通用请求
+   */
+  function handleGeneric() {
+    try {
+      if (!$.response || !$.response.body) {
+        $.done({});
+        return;
+      }
+      
+      let body = JSON.parse($.response.body);
+      console.log(`[SatellaJailed] 尝试处理通用响应`);
+      
+      const now = new Date();
+      const expiration = new Date('2099-09-09');
+      
+      // 检查并修改常见的订阅状态字段
+      const statusFields = ['active', 'status', 'valid', 'isValid', 'isActive', 'success', 'isPremium', 'premium', 'pro', 'isPro', 'isVIP', 'vip'];
+      const expiryFields = ['expires', 'expiresAt', 'expiryDate', 'expireDate', 'expiration', 'expires_date'];
+      
+      // 递归处理对象
+      function processObject(obj) {
+        if (!obj || typeof obj !== 'object') return;
+        
+        for (const key in obj) {
+          // 处理状态字段
+          if (statusFields.includes(key)) {
+            if (typeof obj[key] === 'boolean') {
+              obj[key] = true;
+            } else if (typeof obj[key] === 'string') {
+              obj[key] = key === 'status' ? 'active' : 'true';
+            } else if (typeof obj[key] === 'number') {
+              obj[key] = 1;
+            }
+          }
+          
+          // 处理过期时间字段
+          if (expiryFields.includes(key)) {
+            if (typeof obj[key] === 'string') {
+              obj[key] = expiration.toISOString();
+            } else if (typeof obj[key] === 'number') {
+              obj[key] = expiration.getTime();
+            }
+          }
+          
+          // 递归处理子对象
+          if (typeof obj[key] === 'object' && obj[key] !== null) {
+            processObject(obj[key]);
+          }
+        }
+      }
+      
+      processObject(body);
+      console.log(`[SatellaJailed] 通用响应处理完成`);
+      $.done({ body: JSON.stringify(body) });
+    } catch (e) {
+      console.log(`[SatellaJailed] 通用响应处理错误: ${e}`);
+      $.done({});
+    }
   }
   
-  // 生成随机应用标识（当无法提取时使用）
-  function generateRandomBundleId() {
-    const prefixes = ['com', 'org', 'net', 'io'];
-    const names = ['app', 'service', 'tool', 'studio', 'dev'];
-    const products = ['pro', 'plus', 'premium', 'vip', 'subscription'];
-    
-    const prefix = prefixes[Math.floor(Math.random() * prefixes.length)];
-    const name = names[Math.floor(Math.random() * names.length)];
-    const product = products[Math.floor(Math.random() * products.length)];
-    
-    return `${prefix}.${name}.${product}`;
-  }
-  
-  // 日期处理函数
-  const now = new Date();
-  const expiration = new Date('2099-09-09');
-  
+  /**
+   * 格式化日期为GMT格式
+   */
   function formatDate(date) {
-    return date.toISOString().replace('T', ' ').split('.')[0] + ' Etc/GMT';
+    return date.toISOString().replace('T', ' ').replace(/\.\d+Z$/, ' Etc/GMT');
   }
   
+  /**
+   * 格式化为PST时区日期
+   */
   function formatPSTDate(date) {
-    const pstDate = new Date(date.getTime() - 7*60*60*1000);
-    return pstDate.toISOString().replace('T', ' ').split('.')[0] + ' America/Los_Angeles';
-  }
-  
-  // 生成唯一ID
-  function generateTransactionId() {
-    return Math.floor(Math.random() * 900000000000000) + 100000000000000;
-  }
-  
-  function generateUUID() {
-    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-      const r = Math.random() * 16 | 0;
-      const v = c == 'x' ? r : (r & 0x3 | 0x8);
-      return v.toString(16);
-    }).toUpperCase();
-  }
-  
-  // 处理Apple收据验证
-  function handleAppleValidation() {
-    const bundleId = extractAppInfo();
-    console.log(`[SatellaJailed] 处理Apple验证, bundleId: ${bundleId}`);
-    
-    // 确定产品ID
-    function determineProductId() {
-      // 从原始收据中提取
-      if (body.receipt?.in_app?.length > 0 && body.receipt.in_app[0].product_id) {
-        return body.receipt.in_app[0].product_id;
-      }
-      
-      // 构建可能的产品ID
-      const suffixes = ['yearly', 'annual', 'year', 'lifetime', 'forever', 'premium', 'pro', 'plus', 'monthly', 'weekly', 'unlock', 'vip'];
-      for (const suffix of suffixes) {
-        const possibleId = `${bundleId}.${suffix}`;
-        console.log(`[SatellaJailed] 尝试产品ID: ${possibleId}`);
-        return possibleId;
-      }
-      
-      return `${bundleId}.pro`;
-    }
-    
-    const productId = determineProductId();
-    const transactionId = generateTransactionId().toString();
-    
-    // 构建收据项
-    const receiptItem = {
-      "quantity": "1",
-      "product_id": productId,
-      "transaction_id": transactionId,
-      "original_transaction_id": transactionId,
-      "purchase_date": formatDate(now),
-      "purchase_date_ms": now.getTime().toString(),
-      "purchase_date_pst": formatPSTDate(now),
-      "original_purchase_date": formatDate(now),
-      "original_purchase_date_ms": now.getTime().toString(),
-      "original_purchase_date_pst": formatPSTDate(now),
-      "expires_date": formatDate(expiration),
-      "expires_date_ms": expiration.getTime().toString(),
-      "expires_date_pst": formatPSTDate(expiration),
-      "web_order_line_item_id": generateTransactionId().toString(),
-      "is_trial_period": "false",
-      "is_in_intro_offer_period": "false",
-      "in_app_ownership_type": "PURCHASED"
-    };
-    
-    // 构建响应对象
-    body.status = 0;
-    body.receipt = body.receipt || {};
-    body.receipt.bundle_id = bundleId;
-    body.receipt.application_version = "1.0";
-    body.receipt.in_app = [receiptItem];
-    body.latest_receipt_info = [receiptItem];
-    body.latest_receipt = "MIIUHAYJKoZIhvcNAQcCoIIUDTCCFAkCAQExCzAJBgUrDgMCGgUAMIIDvQYJKoZIhvcN..." + 
-                          Math.random().toString(36).substring(2, 15);
-    body.pending_renewal_info = [{
-      "product_id": productId,
-      "original_transaction_id": receiptItem.original_transaction_id,
-      "auto_renew_product_id": productId,
-      "auto_renew_status": "1"
-    }];
-    
-    console.log(`[SatellaJailed] Apple验证处理完成`);
-  }
-  
-  // 处理RevenueCat验证
-  function handleRevenueCatValidation() {
-    const bundleId = extractAppInfo();
-    console.log(`[SatellaJailed] 处理RevenueCat验证, bundleId: ${bundleId}`);
-    
-    // 判断请求类型
-    if (url.includes('/v1/receipts') || url.includes('/receipts')) {
-      // 收据验证请求
-      body.subscriber = body.subscriber || {};
-      body.subscriber.subscriptions = body.subscriber.subscriptions || {};
-      body.subscriber.entitlements = body.subscriber.entitlements || {};
-      
-      // 提取或生成产品ID
-      let productIds = [];
-      
-      // 从现有订阅中提取
-      if (Object.keys(body.subscriber.subscriptions).length > 0) {
-        productIds = Object.keys(body.subscriber.subscriptions);
-      } else {
-        // 生成可能的产品ID
-        productIds = [`${bundleId}.pro`];
-      }
-      
-      // 更新每个订阅
-      productIds.forEach(productId => {
-        body.subscriber.subscriptions[productId] = {
-          "purchase_date": now.toISOString(),
-          "expires_date": expiration.toISOString(),
-          "is_sandbox": false,
-          "original_purchase_date": now.toISOString(),
-          "period_type": "normal",
-          "ownership_type": "PURCHASED",
-          "store": "app_store",
-          "unsubscribe_detected_at": null
-        };
-      });
-      
-      // 更新每个权益
-      const entitlementIds = Object.keys(body.subscriber.entitlements).length > 0 
-                           ? Object.keys(body.subscriber.entitlements)
-                           : ['pro', 'premium', 'vip', 'plus'];
-      
-      entitlementIds.forEach(entitlementId => {
-        body.subscriber.entitlements[entitlementId] = {
-          "expires_date": expiration.toISOString(),
-          "product_identifier": productIds[0],
-          "purchase_date": now.toISOString()
-        };
-      });
-    }
-    else if (url.includes('/v1/subscribers/') || url.includes('/subscribers/')) {
-      // 订阅者请求
-      body.subscriber = body.subscriber || {};
-      body.subscriber.subscriptions = body.subscriber.subscriptions || {};
-      body.subscriber.entitlements = body.subscriber.entitlements || {};
-      body.subscriber.first_seen = now.toISOString();
-      body.subscriber.original_app_user_id = body.subscriber.original_app_user_id || generateUUID();
-      body.subscriber.non_subscriptions = body.subscriber.non_subscriptions || {};
-      
-      // 添加默认订阅
-      const defaultProductId = `${bundleId}.pro`;
-      body.subscriber.subscriptions[defaultProductId] = {
-        "purchase_date": now.toISOString(),
-        "expires_date": expiration.toISOString(),
-        "is_sandbox": false,
-        "original_purchase_date": now.toISOString(),
-        "period_type": "normal",
-        "ownership_type": "PURCHASED",
-        "store": "app_store",
-        "unsubscribe_detected_at": null
-      };
-      
-      // 添加默认权益
-      body.subscriber.entitlements['pro'] = {
-        "expires_date": expiration.toISOString(),
-        "product_identifier": defaultProductId,
-        "purchase_date": now.toISOString()
-      };
-    }
-    else if (url.includes('/v1/offerings') || url.includes('/offerings')) {
-      // 报价请求 - 不需要修改
-      console.log(`[SatellaJailed] RevenueCat报价请求，保持原样`);
-    }
-    
-    console.log(`[SatellaJailed] RevenueCat验证处理完成`);
-  }
-  
-  // 处理Paddle验证
-  function handlePaddleValidation() {
-    const bundleId = extractAppInfo();
-    console.log(`[SatellaJailed] 处理Paddle验证, bundleId: ${bundleId}`);
-    
-    if (url.includes('/verify') || url.includes('/license/verify') || url.includes('/license/activate')) {
-      // 许可验证
-      body.success = true;
-      body.verified = true;
-      body.expires = expiration.toISOString().split('T')[0];
-      
-      if (body.response) {
-        body.response.type = "subscription";
-        body.response.status = "active";
-        body.response.expiry_date = expiration.toISOString().split('T')[0];
-      } else {
-        body.response = {
-          "type": "subscription",
-          "status": "active",
-          "expiry_date": expiration.toISOString().split('T')[0]
-        };
-      }
-    }
-    else if (url.includes('/order')) {
-      // 订单验证
-      body.success = true;
-      body.order = body.order || {};
-      body.order.status = "processed";
-      body.order.completed = true;
-    }
-    
-    console.log(`[SatellaJailed] Paddle验证处理完成`);
-  }
-  
-  // 处理订阅类型验证
-  function handleSubscriptionValidation() {
-    const bundleId = extractAppInfo();
-    console.log(`[SatellaJailed] 处理订阅类型验证, bundleId: ${bundleId}`);
-    
-    // 找出常见的订阅状态字段
-    const statusFields = [
-      'active', 'status', 'valid', 'isValid', 'isActive', 'success',
-      'premium', 'isPremium', 'isVIP', 'vip', 'pro', 'isPro', 'isPlus',
-      'plus', 'enabled', 'isEnabled', 'purchased', 'hasPurchased'
-    ];
-    
-    statusFields.forEach(field => {
-      if (typeof body[field] === 'boolean') {
-        body[field] = true;
-      } else if (typeof body[field] === 'string') {
-        body[field] = field === 'status' ? 'active' : 'true';
-      } else if (typeof body[field] === 'number') {
-        body[field] = 1;
-      }
-    });
-    
-    // 找出常见的过期日期字段
-    const expiryFields = [
-      'expires', 'expiresAt', 'expiry', 'expiryDate', 'expireDate',
-      'expiration', 'expirationDate', 'expirationTime', 'validUntil'
-    ];
-    
-    expiryFields.forEach(field => {
-      if (typeof body[field] === 'string' && Date.parse(body[field])) {
-        body[field] = expiration.toISOString();
-      } else if (typeof body[field] === 'number') {
-        body[field] = expiration.getTime();
-      }
-    });
-    
-    // 处理嵌套对象
-    if (body.subscription) {
-      handleSubscriptionObject(body.subscription);
-    }
-    if (body.subscriptions) {
-      if (Array.isArray(body.subscriptions)) {
-        body.subscriptions.forEach(sub => handleSubscriptionObject(sub));
-      } else {
-        handleSubscriptionObject(body.subscriptions);
-      }
-    }
-    
-    // 添加通用字段
-    body.active = true;
-    body.expires_date = expiration.toISOString();
-    
-    console.log(`[SatellaJailed] 订阅验证处理完成`);
-  }
-  
-  // 处理订阅对象
-  function handleSubscriptionObject(sub) {
-    if (!sub) return;
-    
-    // 状态字段
-    if (sub.status !== undefined) sub.status = 'active';
-    if (sub.active !== undefined) sub.active = true;
-    if (sub.valid !== undefined) sub.valid = true;
-    if (sub.isActive !== undefined) sub.isActive = true;
-    if (sub.isValid !== undefined) sub.isValid = true;
-    
-    // 过期日期
-    if (sub.expires !== undefined) sub.expires = expiration.toISOString();
-    if (sub.expiresAt !== undefined) sub.expiresAt = expiration.toISOString();
-    if (sub.expiry !== undefined) sub.expiry = expiration.toISOString();
-    if (sub.expiryDate !== undefined) sub.expiryDate = expiration.toISOString();
-    if (sub.expiration !== undefined) sub.expiration = expiration.toISOString();
-    if (sub.expires_date !== undefined) sub.expires_date = expiration.toISOString();
-    
-    // 数字类型时间戳
-    if (typeof sub.expiresTime === 'number') sub.expiresTime = expiration.getTime();
-    if (typeof sub.expiresTimeMs === 'number') sub.expiresTimeMs = expiration.getTime();
-  }
-  
-  // 通用处理
-  function handleGenericValidation() {
-    console.log(`[SatellaJailed] 处理通用验证`);
-    
-    // 查找并修改所有可能的布尔值状态
-    Object.keys(body).forEach(key => {
-      // 布尔值字段
-      if (typeof body[key] === 'boolean' && 
-          (key.includes('active') || key.includes('premium') || key.includes('pro') || 
-           key.includes('vip') || key.includes('valid') || key.includes('purchased'))) {
-        body[key] = true;
-      }
-      
-      // 字符串状态字段
-      if (typeof body[key] === 'string' && 
-          (key.includes('status') || key.includes('state'))) {
-        body[key] = 'active';
-      }
-      
-      // 日期字段
-      if (typeof body[key] === 'string' && 
-          (key.includes('expire') || key.includes('expiry') || key.includes('expiration')) &&
-          Date.parse(body[key])) {
-        body[key] = expiration.toISOString();
-      }
-      
-      // 递归处理子对象
-      if (typeof body[key] === 'object' && body[key] !== null) {
-        deepProcessObject(body[key]);
-      }
-    });
-    
-    // 添加通用字段
-    body.success = true;
-    
-    console.log(`[SatellaJailed] 通用验证处理完成`);
-  }
-  
-  // 递归处理深层对象
-  function deepProcessObject(obj) {
-    if (!obj || typeof obj !== 'object') return;
-    
-    Object.keys(obj).forEach(key => {
-      // 处理布尔值字段
-      if (typeof obj[key] === 'boolean' && 
-          (key.includes('active') || key.includes('premium') || key.includes('pro') || 
-           key.includes('vip') || key.includes('valid') || key.includes('purchased'))) {
-        obj[key] = true;
-      }
-      
-      // 处理状态字符串
-      if (typeof obj[key] === 'string' && 
-          (key.includes('status') || key.includes('state'))) {
-        obj[key] = 'active';
-      }
-      
-      // 处理日期字段
-      if (typeof obj[key] === 'string' && 
-          (key.includes('expire') || key.includes('expiry') || key.includes('expiration')) &&
-          Date.parse(obj[key])) {
-        obj[key] = expiration.toISOString();
-      }
-      
-      // 递归处理子对象
-      if (typeof obj[key] === 'object' && obj[key] !== null) {
-        deepProcessObject(obj[key]);
-      }
-    });
-  }
-  
-  // 主处理函数
-  function processValidation() {
-    const endpointType = identifyEndpointType();
-    console.log(`[SatellaJailed] 识别端点类型: ${endpointType}`);
-    
-    switch (endpointType) {
-      case 'APPLE':
-        handleAppleValidation();
-        break;
-      case 'REVENUECAT':
-        handleRevenueCatValidation();
-        break;
-      case 'PADDLE':
-        handlePaddleValidation();
-        break;
-      case 'SUBSCRIPTION':
-        handleSubscriptionValidation();
-        break;
-      case 'KEYWORD_MATCH':
-      case 'GENERIC':
-      default:
-        handleGenericValidation();
-        break;
-    }
-    
-    // 添加标记
-    body.SatellaJailed_Ultra = {
-      version: "1.0",
-      endpoint_type: endpointType,
-      modified: true,
-      url: url.substring(0, 50) + '...'
-    };
-    
-    console.log(`[SatellaJailed] 处理完成, 端点类型: ${endpointType}`);
-    return body;
-  }
-  
-  // 执行处理
-  try {
-    const modifiedBody = processValidation();
-    $.done({ body: JSON.stringify(modifiedBody) });
-  } catch (error) {
-    console.log(`[SatellaJailed] 错误: ${error.message}, ${error.stack}`);
-    // 出错时依然通过
-    $.done({});
+    const pstDate = new Date(date.getTime() - 7 * 60 * 60 * 1000);
+    return pstDate.toISOString().replace('T', ' ').replace(/\.\d+Z$/, ' America/Los_Angeles');
   }
 })();
