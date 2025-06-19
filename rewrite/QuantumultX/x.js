@@ -5,17 +5,17 @@
 
 [rewrite_local]
 # Apple官方验证
-^https?:\/\/buy\.itunes\.apple\.com\/verifyReceipt$ url script-response-body https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/master/SatellaJailed_Ultra.js
+^https?:\/\/buy\.itunes\.apple\.com\/verifyReceipt$ url script-response-body https://raw.githubusercontent.com/pxx917144686/QuantumultX-Loon-Surge-Stash-Shadowrocket/refs/heads/master/rewrite/QuantumultX/x.js
 
 # RevenueCat验证 - 请求和响应都处理
-^https:\/\/api\.(revenuecat|rc-backup)\.com\/.+\/(receipts$|subscribers\/?(.*?)*$) url script-response-body https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/master/SatellaJailed_Ultra.js
-^https:\/\/api\.(revenuecat|rc-backup)\.com\/.+\/(receipts$|subscribers\/?(.*?)*$) url script-request-header https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/master/SatellaJailed_Ultra.js
+^https:\/\/api\.(revenuecat|rc-backup)\.com\/.+\/(receipts$|subscribers\/?(.*?)*$) url script-response-body https://raw.githubusercontent.com/pxx917144686/QuantumultX-Loon-Surge-Stash-Shadowrocket/refs/heads/master/rewrite/QuantumultX/x.js
+^https:\/\/api\.(revenuecat|rc-backup)\.com\/.+\/(receipts$|subscribers\/?(.*?)*$) url script-request-header https://raw.githubusercontent.com/pxx917144686/QuantumultX-Loon-Surge-Stash-Shadowrocket/refs/heads/master/rewrite/QuantumultX/x.js
 
 # Paddle验证
-^https?:\/\/v3\.paddleapi\.com\/3\.2\/license\/(verify|activate) url script-response-body https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/master/SatellaJailed_Ultra.js
+^https?:\/\/v3\.paddleapi\.com\/3\.2\/license\/(verify|activate) url script-response-body https://raw.githubusercontent.com/pxx917144686/QuantumultX-Loon-Surge-Stash-Shadowrocket/refs/heads/master/rewrite/QuantumultX/x.js
 
 # 通用验证端点
-^https?:\/\/.*\/(verify|validate|receipt|subscription)($|\/) url script-response-body https://raw.githubusercontent.com/YOUR_USERNAME/YOUR_REPO/master/SatellaJailed_Ultra.js
+^https?:\/\/.*\/(verify|validate|receipt|subscription)($|\/) url script-response-body https://raw.githubusercontent.com/pxx917144686/QuantumultX-Loon-Surge-Stash-Shadowrocket/refs/heads/master/rewrite/QuantumultX/x.js
 
 [mitm]
 hostname = buy.itunes.apple.com, api.revenuecat.com, api.rc-backup.com, v3.paddleapi.com
