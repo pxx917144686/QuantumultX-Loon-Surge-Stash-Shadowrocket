@@ -3,7 +3,7 @@
 [rewrite_local]
 ^https?:\/\/(api|buy)\.itunes\.apple\.com\/verifyReceipt url script-response-body https://raw.githubusercontent.com/pxx917144686/ios/master/rewrite/QuantumultX/TXDX.js
 [MITM]
-hostname = api.itunes.apple.com, buy.itunes.apple.com
+hostname = lcs-mobile-cops.adobe.io
 */
 
 let obj = JSON.parse($response.body);
