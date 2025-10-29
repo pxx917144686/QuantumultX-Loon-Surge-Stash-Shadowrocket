@@ -10,9 +10,9 @@
 #!date = 2025-10-29
 
 [Argument]
-APP_ID = input, "", tag = 应用ID, desc = 需要监控的 join 代码，多个用英文逗号分隔（如：LPQmtkUs,Hgun65jg）
+APP_ID = input, "KZy5bjd", tag = 应用ID, desc = 需要监控的 join 代码，多个用英文逗号分隔（如：LPQmtkUs,Hgun65jg）
 RunMonitor = switch, "true", "false", tag = 运行监控脚本, desc = 启用后按定时检测空位并发送通知
 MonitorCron = input, "*/2 * * * *", tag = 监控定时参数, desc = 标准CRON表达式（默认每2分钟）
 
 [Script]
-cron {TaskMonitor} script-path = https://raw.githubusercontent.com/pxx917144686/QuantumultX-Loon-Surge-Stash-Shadowrocket/refs/heads/master/rewrite/Loon/Auto_join_TF.js tag=监控TF空位, timeout=120, enable={RunMonitor}, argument=APP_ID={APP_ID}
+cron "{MonitorCron}" script-path=https://raw.githubusercontent.com/pxx917144686/QuantumultX-Loon-Surge-Stash-Shadowrocket/refs/heads/master/rewrite/Loon/Auto_join_TF.js, tag=监控TF空位, timeout=120, enable={RunMonitor}, argument=APP_ID={APP_ID}
