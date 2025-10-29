@@ -15,6 +15,4 @@ RunMonitor = switch, "true", "false", tag = 运行监控脚本, desc = 启用后
 MonitorCron = input, "*/2 * * * *", tag = 监控定时参数, desc = 标准CRON表达式（默认每2分钟）
 
 [Script]
-cron {MonitorCron} script-path = Auto_join_TF.js, tag = 监控TF空位, timeout = 120, enable = {RunMonitor}, argument = APP_ID={APP_ID}
-
-# 说明：本插件不再依赖MITM或拦截请求；仅通过轮询 join 页面检测空位并发出通知。
+cron {TaskMonitor} script-path = https://raw.githubusercontent.com/pxx917144686/QuantumultX-Loon-Surge-Stash-Shadowrocket/refs/heads/master/rewrite/Loon/Auto_join_TF.js tag=监控TF空位, timeout=120, enable={RunMonitor}, argument=APP_ID={APP_ID}
