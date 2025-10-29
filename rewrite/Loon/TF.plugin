@@ -1,24 +1,20 @@
-#!name = TestFlight自动监控
-#!desc = TestFlight自动监控和加入
-#!openUrl = 
-#!author = 
-#!homepage = 
-#!icon = https://is1-ssl.mzstatic.com/image/thumb/Purple126/v4/77/76/f0/7776f006-91de-4e8d-b1b4-ac0b8e5b7e9b/AppIcon-0-0-1x_U007emarketing-0-0-0-10-0-0-sRGB-0-0-0-GLES2_U002c0-512MB-85-220-0-0.png/144x144bb.png
+#!name=自动加入TestFlight
+#!desc=自动监控TestFlight名额，一旦有新的名额即刻加入。
+#!author=DecoAri[https://github.com/DecoAri], xream[https://github.com/xream], pxx917144686[https://github.com/pxx917144686]
+#!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/Loon.png
+#!tag=Jacob
+
+#!openUrl=https://apps.apple.com/app/id899247664
+#!tag=定时任务
+#!loon_version=3.3.5
+#!date=2025-10-29
+#!input=APP_ID
 
 [Argument]
-CaptureAccountToken=switch,"false","true",tag=捕获账号令牌, desc=此开关控制插件是否捕获账户令牌
-CaptureAppID=switch,"false","true",tag=捕获应用ID, desc=此开关控制插件是否捕获应用ID
-TimingParameters=input, "0 0/2 * * * ?",tag=定时参数, desc=这里需要输入符合CRON表达式的参数
+TimingParameters=input, "*/2 * * * *",tag=定时参数, desc=这里需要输入参数
 
 [Rule]
-DOMAIN,testflight.apple.com,PROXY
+DOMAIN,testflight.apple.com,DIRECT
 
 [Script]
-http-request ^https?:\/\/testflight\.apple\.com\/v3\/accounts\/.*\/apps$ script-path=https://raw.githubusercontent.com/pxx917144686/QuantumultX-Loon-Surge-Stash-Shadowrocket/refs/heads/master/rewrite/Loon/TF_keys.js, tag=获取账号令牌, enable={CaptureAccountToken}
-
-http-request ^https://testflight.apple.com/join/(.*) script-path=https://raw.githubusercontent.com/pxx917144686/QuantumultX-Loon-Surge-Stash-Shadowrocket/refs/heads/master/rewrite/Loon/TF_keys.js, tag=应用ID捕获, enable={CaptureAppID}
-
 cron "{TimingParameters}" script-path=https://raw.githubusercontent.com/pxx917144686/QuantumultX-Loon-Surge-Stash-Shadowrocket/refs/heads/master/rewrite/Loon/Auto_join_TF.js, timeout=180, tag=自动加入TF
-
-[MITM]
-hostname = testflight.apple.com
