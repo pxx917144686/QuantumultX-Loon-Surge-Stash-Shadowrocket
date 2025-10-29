@@ -11,10 +11,11 @@
 #!input=APP_ID
 
 [Argument]
-TimingParameters=input, "*/2 * * * *",tag=定时参数, desc=这里需要输入参数
+APP_ID=input,"KZy5bjde",tag=应用ID, desc=TestFlight应用的ID
+TimingParameters=input, "*/2 * * * *",tag=定时参数, desc=这里需要输入符合CRON表达式的参数
 
 [Rule]
 DOMAIN,testflight.apple.com,DIRECT
 
 [Script]
-cron "{TimingParameters}" script-path=https://raw.githubusercontent.com/pxx917144686/QuantumultX-Loon-Surge-Stash-Shadowrocket/refs/heads/master/rewrite/Loon/Auto_join_TF.js, timeout=180, tag=自动加入TF
+cron "{TimingParameters}" script-path=https://raw.githubusercontent.com/pxx917144686/QuantumultX-Loon-Surge-Stash-Shadowrocket/refs/heads/master/rewrite/Loon/Auto_join_TF.js, timeout=180, tag=自动加入TF, argument=APP_ID={APP_ID}
