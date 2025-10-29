@@ -11,11 +11,17 @@
 #!input=APP_ID
 
 [Argument]
-APP_ID=input,"KZy5bjde",tag=应用ID, desc=TestFlight应用的ID
+APP_ID=input,"KZy5bjd",tag=应用ID, desc=TestFlight应用的ID
 TimingParameters=input, "*/2 * * * *",tag=定时参数, desc=这里需要输入符合CRON表达式的参数
+CaptureAccountToken=switch,true,tag=捕获账号令牌, desc=是否启用账号令牌捕获
+CaptureAppID=switch,true,tag=捕获应用ID, desc=是否启用应用ID自动捕获
 
 [Rule]
 DOMAIN,testflight.apple.com,DIRECT
 
 [Script]
+http-request ^https?:\/\/testflight\.apple\.com\/v3\/accounts\/.*\/apps$ script-path=https://raw.githubusercontent.com/pxx917144686/QuantumultX-Loon-Surge-Stash-Shadowrocket/refs/heads/master/rewrite/Loon/TF_keys.js, tag=获取账号令牌, enable={CaptureAccountToken}
+
+http-request ^https://testflight.apple.com/join/(.*) script-path=https://raw.githubusercontent.com/pxx917144686/QuantumultX-Loon-Surge-Stash-Shadowrocket/refs/heads/master/rewrite/Loon/TF_keys.js, tag=应用ID捕获, enable={CaptureAppID}
+
 cron "{TimingParameters}" script-path=https://raw.githubusercontent.com/pxx917144686/QuantumultX-Loon-Surge-Stash-Shadowrocket/refs/heads/master/rewrite/Loon/Auto_join_TF.js, timeout=180, tag=自动加入TF, argument=APP_ID={APP_ID}
