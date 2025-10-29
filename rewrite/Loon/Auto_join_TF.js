@@ -1,8 +1,12 @@
-// TestFlight 自动监控脚本 
+// TestFlight 自动监控
+
+// 获取插件参数配置
+const APP_ID = $argument.APP_ID || 'KZy5bjde'
+const CHECK_INTERVAL_MINUTES = parseInt($argument.CHECK_INTERVAL) || 2
 
 const CONFIG = {
-  APP_ID: 'KZy5bjde',
-  CHECK_INTERVAL: 120, // 秒
+  APP_ID: APP_ID,
+  CHECK_INTERVAL: CHECK_INTERVAL_MINUTES * 60, // 转换为秒
   MAX_RETRY: 3,
   NOTIFICATION_COOLDOWN: 300 // 5分钟内不重复通知
 }
