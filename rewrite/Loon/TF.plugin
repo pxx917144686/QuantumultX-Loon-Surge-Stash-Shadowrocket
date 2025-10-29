@@ -20,11 +20,11 @@ TimingParameters=input, "0 0/2 * * * ?",tag=定时参数, desc=这里需要输�
 DOMAIN,testflight.apple.com,PROXY
 
 [Script]
-http-request ^https?:\/\/testflight\.apple\.com\/v3\/accounts\/.*\/apps$ script-path=https://github.com/ifflagged/Darwin/raw/main/Modules/JS/Kelee/Auto_Join_TF/TF_keys.js, tag=获取账号令牌, enable={CaptureAccountToken}
+http-request ^https?:\/\/testflight\.apple\.com\/v3\/accounts\/.*\/apps$ script-path=https://raw.githubusercontent.com/pxx917144686/QuantumultX-Loon-Surge-Stash-Shadowrocket/refs/heads/master/rewrite/Loon/TF_keys.js, tag=获取账号令牌, enable={CaptureAccountToken}
 
-http-request ^https://testflight.apple.com/join/(.*) script-path=https://github.com/ifflagged/Darwin/raw/main/Modules/JS/Kelee/Auto_Join_TF/TF_keys.js, tag=应用ID捕获, enable={CaptureAppID}
+http-request ^https://testflight.apple.com/join/(.*) script-path=https://raw.githubusercontent.com/pxx917144686/QuantumultX-Loon-Surge-Stash-Shadowrocket/refs/heads/master/rewrite/Loon/TF_keys.js, tag=应用ID捕获, enable={CaptureAppID}
 
-cron "{TimingParameters}" script-path=https://github.com/ifflagged/Darwin/raw/main/Modules/JS/Kelee/Auto_Join_TF/Auto_join_TF.js, timeout=180, tag=自动加入TF
+cron "{TimingParameters}" script-path=https://raw.githubusercontent.com/pxx917144686/QuantumultX-Loon-Surge-Stash-Shadowrocket/refs/heads/master/rewrite/Loon/Auto_join_TF.js, timeout=180, tag=自动加入TF
 
 [MITM]
 hostname = testflight.apple.com
