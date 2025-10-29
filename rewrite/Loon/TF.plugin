@@ -1,27 +1,20 @@
-#!name=自动加入TestFlight
-#!desc=自动监控TestFlight名额，一旦有新的名额即刻加入。
-#!author=DecoAri[https://github.com/DecoAri], xream[https://github.com/xream], pxx917144686[https://github.com/pxx917144686]
-#!icon=https://raw.githubusercontent.com/luestr/IconResource/main/App_icon/120px/Loon.png
-#!tag=Jacob
-
-#!openUrl=https://apps.apple.com/app/id899247664
-#!tag=定时任务
-#!loon_version=3.3.5
-#!date=2025-10-29
-#!input=APP_ID
+#!name = 监控TestFlight空位（无需MITM）
+#!desc = 定时检测TestFlight join页面是否出现可加入空位；检测到空位立即发送带直达链接的通知，用户点击后直接打开TestFlight链接。
+#!openUrl = https://apps.apple.com/app/id899247664
+#!author = pxx917144686[https://github.com/pxx917144686]
+#!tag = 定时任务
+#!loon_version = 3.x.x
+#!homepage = https://github.com/pxx917144686
+#!tg-channel=https://t.me/inaisi
+#!input = APP_ID
+#!date = 2025-10-29
 
 [Argument]
-APP_ID=input,"KZy5bjd",tag=应用ID, desc=TestFlight应用的ID
-TimingParameters=input, "*/2 * * * *",tag=定时参数, desc=这里需要输入符合CRON表达式的参数
-CaptureAccountToken=switch,true,tag=捕获账号令牌, desc=是否启用账号令牌捕获
-CaptureAppID=switch,true,tag=捕获应用ID, desc=是否启用应用ID自动捕获
-
-[Rule]
-DOMAIN,testflight.apple.com,DIRECT
+APP_ID = input, "", tag = 应用ID, desc = 需要监控的 join 代码，多个用英文逗号分隔（如：LPQmtkUs,Hgun65jg）
+RunMonitor = switch, "true", "false", tag = 运行监控脚本, desc = 启用后按定时检测空位并发送通知
+MonitorCron = input, "*/2 * * * *", tag = 监控定时参数, desc = 标准CRON表达式（默认每2分钟）
 
 [Script]
-http-request ^https?:\/\/testflight\.apple\.com\/v3\/accounts\/.*\/apps$ script-path=https://raw.githubusercontent.com/pxx917144686/QuantumultX-Loon-Surge-Stash-Shadowrocket/refs/heads/master/rewrite/Loon/TF_keys.js, tag=获取账号令牌, enable={CaptureAccountToken}
+cron {MonitorCron} script-path = Auto_join_TF.js, tag = 监控TF空位, timeout = 120, enable = {RunMonitor}, argument = APP_ID={APP_ID}
 
-http-request ^https://testflight.apple.com/join/(.*) script-path=https://raw.githubusercontent.com/pxx917144686/QuantumultX-Loon-Surge-Stash-Shadowrocket/refs/heads/master/rewrite/Loon/TF_keys.js, tag=应用ID捕获, enable={CaptureAppID}
-
-cron "{TimingParameters}" script-path=https://raw.githubusercontent.com/pxx917144686/QuantumultX-Loon-Surge-Stash-Shadowrocket/refs/heads/master/rewrite/Loon/Auto_join_TF.js, timeout=180, tag=自动加入TF, argument=APP_ID={APP_ID}
+# 说明：本插件不再依赖MITM或拦截请求；仅通过轮询 join 页面检测空位并发出通知。
