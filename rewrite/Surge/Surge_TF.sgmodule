@@ -1,0 +1,12 @@
+#!name=自动加入TestFlight
+#!desc=在macOS Surge中监控TestFlight名额并自动加入
+#!author=pxx917144686
+#!date=2025-10-29
+
+[Script]
+获取账号令牌 = type=http-request, pattern=^https?:\/\/testflight\.apple\.com\/v3\/accounts\/.*\/apps$, script-path=https://raw.githubusercontent.com/pxx917144686/QuantumultX-Loon-Surge-Stash-Shadowrocket/refs/heads/master/rewrite/Loon/TF_keys.js
+应用ID捕获 = type=http-request, pattern=^https://testflight.apple.com/join/(.*), script-path=https://raw.githubusercontent.com/pxx917144686/QuantumultX-Loon-Surge-Stash-Shadowrocket/refs/heads/master/rewrite/Loon/TF_keys.js
+自动加入TF = type=cron, cronexp=*/2 * * * *, script-path=https://raw.githubusercontent.com/pxx917144686/QuantumultX-Loon-Surge-Stash-Shadowrocket/refs/heads/master/rewrite/Loon/Auto_join_TF.js,, timeout=180, argument=APP_ID=KZy5bjd
+
+[MITM]
+hostname = %APPEND% testflight.apple.com
